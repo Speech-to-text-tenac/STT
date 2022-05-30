@@ -1,0 +1,11 @@
+dvc==2.10.2
+dvc-render==0.0.5
+isort==5.10.1
+matplotlib
+mlflow
+numpy==1.22.3
+pandas==1.4.2
+scikit-learn==1.0.2
+scipy==1.8.0
+seaborn==0.11.2
+sklearn==0.0
