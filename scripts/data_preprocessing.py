@@ -31,7 +31,7 @@ class AudioUtil():
 
     def open(self, audio_file):
         """Load an audio file. Return the signal as a tensor and the sample rate."""
-           try:
+         try:
                 self.logger.info(
                     'Opening audio file for data preprocessing')
                 sig, sr = torchaudio.load(audio_file)
@@ -150,32 +150,45 @@ class AudioUtil():
         # are 'wrapped around' to the start of the transformed signal.
         # ----------------------------
         @staticmethod
-        def signal_shift(aud, max_shift_pct):
-            sig, sr = aud
-            roll_by = int(random.random()*max_shift_pct*len(sig[0]))
-            return (sig.roll(roll_by), sr)
-
+        def signal_shift(self,aud, max_shift_pct):
+            
+            try:
+                self.logger.info(
+                    'Shifts the signal to the left or right by some percent')
+                self.sig, sr = aud
+                roll_by = int(random.random()*max_shift_pct*len(sig[0]))
+                return (self.sig.roll(roll_by), sr)
+            except Exception as e:
+                self.logger.error('Failed to shift data')
+                self.logger.error(e)
+                sys.exit(1)
         # ----------------------------
         # Generate a Spectrogram
         # ----------------------------
         @staticmethod
-        def spectro_gram(aud, spectro_type='mel', n_mels=64, n_fft=1024, hop_len=None):
-            sig, sr = aud
-            f_min, f_max, ws, top_db, pad = 0.0, None, None, 80, 0
+        def spectro_gram(self,aud, spectro_type='mel', n_mels=64, n_fft=1024, hop_len=None):
+            try:
+                self.sig, sr = aud
+                f_min, f_max, ws, top_db, pad = 0.0, None, None, 80, 0
 
-            # spec has shape [channel, n_mels, time], where channel is mono, stereo etc
-            if (spectro_type == 'mel'):
-                spec = transforms.MelSpectrogram(
-                    sr, n_fft, ws, hop_len, f_min, f_max, pad, n_mels)(sig)
-            elif (spectro_type == 'mfcc'):
-                pass
-            else:
-                spec = transforms.Spectrogram(
-                    n_fft, ws, hop_len, pad, normalize=False)(sig)
+                # spec has shape [channel, n_mels, time], where channel is mono, stereo etc
+                if (spectro_type == 'mel'):
+                    spec = transforms.MelSpectrogram(
+                        sr, n_fft, ws, hop_len, f_min, f_max, pad, n_mels)(sig)
+                elif (spectro_type == 'mfcc'):
+                    pass
+                else:
+                    spec = transforms.Spectrogram(
+                        n_fft, ws, hop_len, pad, normalize=False)(sig)
 
-            # Convert to decibels
-            spec = transforms.AmplitudeToDB(top_db=top_db)(spec)
-            return (spec)
+                # Convert to decibels
+                spec = transforms.AmplitudeToDB(top_db=top_db)(spec)
+                return (spec)
+            except Exception as e:
+                self.logger.error('Failed to convert decibels')
+                self.logger.error(e)
+                sys.exit(1)
+
 
         # ----------------------------
         # Augment the Spectrogram by masking out some sections of it in both the frequency
