@@ -1,11 +1,12 @@
 """Load Audio data from a directory."""
 
+import glob
+import json
 import os
 import sys
+
 import librosa
-import json
 import pandas as pd
-import glob
 from logger import Logger
 
 
