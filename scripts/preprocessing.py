@@ -45,6 +45,19 @@ class AudioUtil():
 
     return ((resig, sr))
 
+  # or we can open and resample the data the same time
+  # resampling any loaded audio files to 44.1KHZ
+  @staticmethod 
+  def resample(df, column):
+    sampled_audio = []
+    rates = []
+    for i in df[column]:
+        audio, rate=librosa.load(i, sr=44100)
+        sampled_audio.append(audio)
+        rates.append(rate)
+    
+    return (sampled_audio, rates)
+
   @staticmethod
   def resample(aud, newsr):
     sig, sr = aud
