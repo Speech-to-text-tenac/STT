@@ -1,17 +1,19 @@
 import math
 import random
-import warnings
 import sys
+import warnings
 
 import librosa  # for audio processing
 import matplotlib.pyplot as plt
 import numpy as np
+from soupsieve import select
+from sympy import EX
 import torch
 import torchaudio
 from IPython.display import Audio, display
+from logger import Logger
 from scipy.io import wavfile  # for audio processing
 from torchaudio import transforms
-from logger import Logger
 
 warnings.filterwarnings("ignore")
 
@@ -41,110 +43,145 @@ class AudioUtil():
                 self.logger.error(e)
                 sys.exit(1)
 
-        def resize_audio(self, audios: dict,max_duration:float) -> dict:
-            """Extend duration of audio samples to max_duration.
+	def resize_audio(self, audios: dict,max_duration:float) -> dict:
+		"""Extend duration of audio samples to max_duration.
 
-            Args:
-                    audios (dict): Dictionary of audio samples.
-                    max_duration (float): The duration to set for the audio samples
+		Args:
+				audios (dict): Dictionary of audio samples.
+				max_duration (float): The duration to set for the audio samples
 
-            Returns:
-                    dict: Dictionary of resized audio samples.
-            """
-            try:
-                self.logger.info("Resizing audio samples")
-                resized_audios = {}
-                for label in audios:
-                    resized_audios[label] = librosa.util.fix_length(audios[label], size=int(max_duration*44100))
-                return resized_audios
-            except Exception as e:
-                self.logger.error('Failed to resize audio')
-                self.logger.error(e)
-                sys.exit(1)
+		Returns:
+				dict: Dictionary of resized audio samples.
+		"""
+		try:
+			self.logger.info("Resizing audio samples")
+			resized_audios = {}
+			for label in audios:
+				resized_audios[label] = librosa.util.fix_length(audios[label], size=int(max_duration*44100))
+			return resized_audios
+		except Exception as e:
+			self.logger.error('Failed to resize audio')
+			self.logger.error(e)
+			sys.exit(1)
         # ----------------------------
         # Show a widget to play the audio sound
         # ----------------------------
 
         @staticmethod
         def play(self, aud):
-            sig, sr = aud
-            display(Audio(data=sig, rate=sr))
+            """Play audio."""
+            try:
+                self.logger.info("Playing audio")
+				sig, sr = aud
+				display(Audio(data=sig, rate=sr))
+			except Exception as e:
+				self.logger.error('Failed to play audio')
+				self.logger.error(e)
+				sys.exit(1)
 
         @staticmethod
-        def rechannel(aud, new_channel):
-            sig, sr = aud
-            # resig = sig
+        def rechannel(self, aud, new_channel):
+            """Change the number of channels of an audio signal."""
+            try:
+                self.logger.info("Changing the number of channels")
+				sig, sr = aud
+				# resig = sig
 
-            if (sig.shape[0] == new_channel):
-                # Nothing to do
-                return aud
+				if (sig.shape[0] == new_channel):
+					# Nothing to do
+					return aud
 
-            if (new_channel == 1):
-                # Convert from stereo to mono by selecting only the first channel
-                resig = sig[:1, :]
-            else:
-                # Convert from mono to stereo by duplicating the first channel
-                resig = torch.cat([sig, sig])
+				if (new_channel == 1):
+					# Convert from stereo to mono by selecting only the first channel
+					resig = sig[:1, :]
+				else:
+					# Convert from mono to stereo by duplicating the first channel
+					resig = torch.cat([sig, sig])
 
-            return ((resig, sr))
+				return ((resig, sr))	
+			except Exception as e:
+				self.logger.error("Failed to change the number of channels")
+				self.logger.error(e)
+				sys.exit(1)
 
         # or we can open and resample the data the same time
         # resampling any loaded audio files to 44.1KHZ
+        # @staticmethod
+        # def resample(df, column):
+        #     sampled_audio = []
+        #     rates = []
+        #     for i in df[column]:
+        #         audio, rate = librosa.load(i, sr=44100)
+        #         sampled_audio.append(audio)
+        #         rates.append(rate)
+
+        #     return (sampled_audio, rates)
+
         @staticmethod
-        def resample(df, column):
-            sampled_audio = []
-            rates = []
-            for i in df[column]:
-                audio, rate = librosa.load(i, sr=44100)
-                sampled_audio.append(audio)
-                rates.append(rate)
+        def resample(self, aud, newsr):
+			"""Resample audio."""
+			try:
+				self.logger.info("Resampling audio")
+				sig, sr = aud
 
-            return (sampled_audio, rates)
+				if (sr == newsr):
+					# Nothing to do
+					return aud
 
-        @staticmethod
-        def resample(aud, newsr):
-            sig, sr = aud
+				num_channels = sig.shape[0]
+				# Resample first channel
+				resig = torchaudio.transforms.Resample(sr, newsr)(sig[:1, :])
+				if (num_channels > 1):
+					# Resample the second channel and merge both channels
+					retwo = torchaudio.transforms.Resample(sr, newsr)(sig[1:, :])
+					resig = torch.cat([resig, retwo])
 
-            if (sr == newsr):
-                # Nothing to do
-                return aud
-
-            num_channels = sig.shape[0]
-            # Resample first channel
-            resig = torchaudio.transforms.Resample(sr, newsr)(sig[:1, :])
-            if (num_channels > 1):
-                # Resample the second channel and merge both channels
-                retwo = torchaudio.transforms.Resample(sr, newsr)(sig[1:, :])
-                resig = torch.cat([resig, retwo])
-
-            return ((resig, newsr))
+				return ((resig, newsr))
+			except Exception as e:
+				self.logger.error('Failed to resample audio')
+				self.logger.error(e)
+				sys.exit(1)
 
         # ----------------------------
         # Pad (or trim) the signal to a fixed length 'max_ms' in milliseconds
         # ----------------------------
         @staticmethod
-        def pad_trim(aud, max_ms):
-            sig, sr = aud
-            num_rows, sig_len = sig.shape
-            max_len = sr//1000 * max_ms
+        def pad_trim(self, aud, max_ms):
+			"""Trim pad.
 
-            if (sig_len > max_len):
-                # Trim the signal to the given length
-                sig = sig[:, :max_len]
+			Args:
+				aud (_type_): _description_
+				max_ms (_type_): _description_
 
-            elif (sig_len < max_len):
-                # Length of padding to add at the beginning and end of the signal
-                pad_begin_len = random.randint(0, max_len - sig_len)
-                pad_end_len = max_len - sig_len - pad_begin_len
+			Returns:
+				_type_: _description_
+			"""
+			try:
+				self.logger.info("Padding/Trimming audio")
+				sig, sr = aud
+				num_rows, sig_len = sig.shape
+				max_len = sr//1000 * max_ms
 
-                # Pad with 0s
-                pad_begin = torch.zeros((num_rows, pad_begin_len))
-                pad_end = torch.zeros((num_rows, pad_end_len))
+				if (sig_len > max_len):
+					# Trim the signal to the given length
+					sig = sig[:, :max_len]
 
-                sig = torch.cat((pad_begin, sig, pad_end), 1)
+				elif (sig_len < max_len):
+					# Length of padding to add at the beginning and end of the signal
+					pad_begin_len = random.randint(0, max_len - sig_len)
+					pad_end_len = max_len - sig_len - pad_begin_len
 
-            return (sig, sr)
+					# Pad with 0s
+					pad_begin = torch.zeros((num_rows, pad_begin_len))
+					pad_end = torch.zeros((num_rows, pad_end_len))
 
+					sig = torch.cat((pad_begin, sig, pad_end), 1)
+				self.logger.info("Padding/Trimming audio completed")
+				return (sig, sr)
+			except Exception as e:
+				self.logger.error("Failed to pad/trim audio")
+				self.logger.error(e)
+				sys.exit(1)
         # ----------------------------
         # Shifts the signal to the left or right by some percent. Values at the end
         # are 'wrapped around' to the start of the transformed signal.
@@ -185,64 +222,89 @@ class AudioUtil():
         # ----------------------------
 
         @staticmethod
-        def spectro_augment(spec, max_mask_pct=0.1, n_freq_masks=1, n_time_masks=1):
-            _, n_mels, n_steps = spec.shape
+        def spectro_augment(self, spec, max_mask_pct=0.1, n_freq_masks=1, n_time_masks=1):
+            """Augment spectrogram."""
+            try:
+                self.logger.info("Augmenting spectrogram")
+				_, n_mels, n_steps = spec.shape
 
-            # Frequency Masking: frequency channels [f0, f0 + f) are masked. f is chosen from a
-            # uniform distribution from 0 to the frequency mask parameter F, and f0 is chosen
-            # from (0, ν − f) where ν is the number of frequency channels.
-            # Time Masking: t consecutive time steps [t0, t0 + t) are masked. t is chosen from a
-            # uniform distribution from 0 to the time mask parameter T, and t0 is chosen from [0, τ − t).
+				# Frequency Masking: frequency channels [f0, f0 + f) are masked. f is chosen from a
+				# uniform distribution from 0 to the frequency mask parameter F, and f0 is chosen
+				# from (0, ν − f) where ν is the number of frequency channels.
+				# Time Masking: t consecutive time steps [t0, t0 + t) are masked. t is chosen from a
+				# uniform distribution from 0 to the time mask parameter T, and t0 is chosen from [0, τ − t).
 
-            # Max height of the frequency mask
-            # rounding up in case of small %
-            F = math.ceil(n_mels * max_mask_pct)
-            # Max width of the time mask
-            T = math.ceil(n_steps * max_mask_pct)
+				# Max height of the frequency mask
+				# rounding up in case of small %
+				F = math.ceil(n_mels * max_mask_pct)
+				# Max width of the time mask
+				T = math.ceil(n_steps * max_mask_pct)
 
-            # Create frequency masks
-            fill = spec.mean()
-            for i in range(0, n_freq_masks):
-                f = random.randint(0, F)
-                f0 = random.randint(0, n_mels-f)
-                spec[0][f0:f0+f] = fill
+				# Create frequency masks
+				fill = spec.mean()
+				for i in range(0, n_freq_masks):
+					f = random.randint(0, F)
+					f0 = random.randint(0, n_mels-f)
+					spec[0][f0:f0+f] = fill
 
-            # Create time masks
-            for i in range(0, n_time_masks):
-                t = random.randint(0, T)
-                t0 = random.randint(0, n_steps-t)
-                spec[0][:, t0:t0+t] = fill
-            return spec
-
+				# Create time masks
+				for i in range(0, n_time_masks):
+					t = random.randint(0, T)
+					t0 = random.randint(0, n_steps-t)
+					spec[0][:, t0:t0+t] = fill
+				return spec
+			except Exception as e:
+				self.logger.error("Failed to Augment spectrogram")
+				self.logger.error(e)
+				sys.exit(1)
         # ----------------------------
         # Plot the audio signal
         # ----------------------------
-        def show_wave(aud, label='', ax=None):
-            sig, sr = aud
-            if (not ax):
-                _, ax = plt.subplots(1, 1, figsize=(3, 3))
-            ax.plot(sig[0])
-            ax.set_title(label)
-
+        def show_wave(self, aud, label='', ax=None):
+            """Plot the audio signal."""
+            try: 
+				self.logger.info("Plotting audio")
+				sig, sr = aud
+				if (not ax):
+					_, ax = plt.subplots(1, 1, figsize=(3, 3))
+				ax.plot(sig[0])
+				ax.set_title(label)
+			except Exception as e:
+				self.logger.error("Failed to plot audio")
+				self.logger.error(e)
+				sys.exit(1)
         # ----------------------------
         # Plot the audio signal before and after a transform
         # ----------------------------
-        def show_transform(orig, trans):
-            osig, osr = orig
-            tsig, tsr = trans
-            if orig is not None:
-                plt.plot(osig[0], 'm', label="Orig.")
-            if trans is not None:
-                plt.plot(tsig[0], 'c', alpha=0.5, label="Transf.")
-            plt.legend()
-            plt.show()
-
+        def show_transform(self, orig, trans):
+            """Show transform"""
+            try:
+				self.logger.info("Plotting transform")
+				osig, osr = orig
+				tsig, tsr = trans
+				if orig is not None:
+					plt.plot(osig[0], 'm', label="Orig.")
+				if trans is not None:
+					plt.plot(tsig[0], 'c', alpha=0.5, label="Transf.")
+				plt.legend()
+				plt.show()
+			except Exception as e:
+				self.logger.error("Failed to plot transform")
+				self.logger.error(e)
+				sys.exit(1)
         # ----------------------------
         # Plot the spectrogram
         # ----------------------------
         def show_spectro(spec, label='', ax=None, figsize=(6, 6)):
-            if (not ax):
-                _, ax = plt.subplots(1, 1, figsize=figsize)
-            # Reduce first dimension if it is greyscale
-            ax.imshow(spec if (spec.shape[0] == 3) else spec.squeeze(0))
-            ax.set_title(f'{label}, {list(spec.shape)}')
+            """Shows a spectrogram."""
+            try:
+                self.logger.info("Plotting spectrogram")
+				if (not ax):
+					_, ax = plt.subplots(1, 1, figsize=figsize)
+				# Reduce first dimension if it is greyscale
+				ax.imshow(spec if (spec.shape[0] == 3) else spec.squeeze(0))
+				ax.set_title(f'{label}, {list(spec.shape)}')
+			except Exception as e:
+				self.logger.error("Failed to plot spectrogram")
+				self.logger.error(e)
+				sys.exit(1)
