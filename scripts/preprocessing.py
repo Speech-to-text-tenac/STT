@@ -1,7 +1,7 @@
 
 import math, random
 import torch
-from IPython.display import Audio
+from IPython.display import Audio, display
 import torchaudio
 from torchaudio import transforms
 import librosa   #for audio processing
