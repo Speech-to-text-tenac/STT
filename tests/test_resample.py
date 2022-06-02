@@ -1,4 +1,10 @@
 import unittest
+from preprocessing import resample
+import pandas as pd
+
+
+data = pd.read_csv("../data/test.csv")
+col = [] # columns to be filled with data attributes
 
 class TestResampling(unittest.TestCase):
     def test_check_resampling(self):
