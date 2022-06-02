@@ -1,12 +1,12 @@
 """Load Audio data from a directory."""
 
-import glob
 import json
 import os
 import sys
 
 import librosa
 import pandas as pd
+from glob import glob
 from logger import Logger
 
 
@@ -57,7 +57,7 @@ class DataLoader:
             self.logger.error(e)
             sys.exit(1)
 
-    def get_wav_files(self, path: str) -> list:
+    def get_wav_files(self) -> list:
         """Get the wav files from a folder.
 
         Args:
@@ -68,6 +68,8 @@ class DataLoader:
         """
         try:
             self.logger.info('Getting wav files')
+            path = self.data_dir
+            path = path + '*.wav'
             wav_files = glob(path)
             self.logger.info('Successfully got wav files')
             return wav_files
@@ -76,14 +78,14 @@ class DataLoader:
             self.logger.error(e)
             sys.exit(1)
 
-    def load_transcription(self, path: str, dest_path: str) -> dict:
+    def load_transcription(self, file_path: str, dest_path: str, save=False) -> dict:
         """Load transcription data"""
 
         audio_path = []
         text = []
         duration = []
         try:
-            with open(path) as fp:
+            with open(file_path) as fp:
                 Lines = fp.readlines()
                 for line in Lines:
                     valid_json = {}
@@ -94,8 +96,7 @@ class DataLoader:
                     path = line.split(' ')[0]
 
                     path = '../data/AMHARIC/data/train/wav/' + path + '.wav'
-                    audios = self.get_wav_files(
-                        '../data/AMHARIC/data/train/wav/*.wav')
+                    audios = self.get_wav_files()
                     if path not in audios:
                         continue
 
@@ -107,9 +108,11 @@ class DataLoader:
                     # GEt the duration of the audio file
                     valid_json['duration'] = librosa.get_duration(
                         filename=path)
-                    with open(dest_path, 'a', encoding='utf-8') as fp:
-                        fp.write(json.dumps(valid_json, ensure_ascii=False))
-                        fp.write("\n")
+                    if save:
+                        with open(dest_path, 'a', encoding='utf-8') as fp:
+                            fp.write(json.dumps(
+                                valid_json, ensure_ascii=False))
+                            fp.write("\n")
             self.logger.info('Successfully loaded transcription data')
             self.logger.info(
                 'Total number of files: {}'.format(len(audio_path)))
@@ -124,10 +127,12 @@ class DataLoader:
 
         try:
             self.logger.info('Generating meta data csv')
-            audio_path, text, duration = self.load_transcription(path)
+            audio_path, text, duration = self.load_transcription(
+                path, dest_path)
             data = pd.DataFrame(
                 {'key': audio_path, 'text': text, 'duration': duration})
             data.to_csv(dest_path, index=False)
+            print("Meta data creatwd successfully")
             self.logger.info('Successfully generated meta data csv')
         except Exception as e:
             self.logger.error('Failed to generate meta data csv')

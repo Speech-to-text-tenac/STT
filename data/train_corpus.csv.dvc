@@ -1,0 +1,4 @@
+outs:
+- md5: 0d6a47e4aca5c0420371695fa72ad33b
+  size: 2129319
+  path: train_corpus.csv
