@@ -46,6 +46,7 @@ class AudioUtil():
     return ((resig, sr))
 
   # or we can open and resample the data the same time
+  # by using the function librosa
   # resampling any loaded audio files to 44.1KHZ
   @staticmethod 
   def resample(df, column):
