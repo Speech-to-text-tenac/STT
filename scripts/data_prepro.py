@@ -10,6 +10,7 @@ import numpy as np
 from IPython.display import Audio, display
 from pydub import AudioSegment
 from scipy.io import wavfile  # for audio processing
+import sklearn
 from numpy.lib.stride_tricks import as_strided
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
@@ -180,22 +181,36 @@ class AudioUtil():
 
 
     def plot_spectrogram(self, vis_spectrogram_feature):
-            """
-            This function plots a normalized spectogram
-            This code was obtained from the notebook provided by @Desmond, one of the tutors at 10Academy batch 5 training
+        """
+        This function plots a normalized spectogram
+        This code was obtained from the notebook provided by @Desmond, one of the tutors at 10Academy batch 5 training
 
 
-            Args:
-            vis_spectogram_feature: 2D array of the spectogram to visualize
-            """
+        Args:
+        vis_spectogram_feature: 2D array of the spectogram to visualize
+        """
             # plot the normalized spectrogram
-            fig = plt.figure(figsize=(12,5))
-            ax = fig.add_subplot(111)
-            im = ax.imshow(vis_spectrogram_feature, cmap=plt.cm.jet, aspect='auto')
-            plt.title('Spectrogram')
-            plt.ylabel('Time')
-            plt.xlabel('Frequency')
-            divider = make_axes_locatable(ax)
-            cax = divider.append_axes("right", size="5%", pad=0.05)
-            plt.colorbar(im, cax=cax)
-            plt.show()
+        fig = plt.figure(figsize=(12,5))
+        ax = fig.add_subplot(111)
+        im = ax.imshow(vis_spectrogram_feature, cmap=plt.cm.jet, aspect='auto')
+        plt.title('Spectrogram')
+        plt.ylabel('Time')
+        plt.xlabel('Frequency')
+        divider = make_axes_locatable(ax)
+        cax = divider.append_axes("right", size="5%", pad=0.05)
+        plt.colorbar(im, cax=cax)
+        plt.show()
+
+
+    def spectral_centroids(self, audio, sampling_rate):
+        """
+        computes the spectral centroid for each frame in an audio signal and the time variable for visualization
+        """
+        spectral_centroids = librosa.feature.spectral_centroid(audio, sr=sampling_rate)
+        frames = range(len(spectral_centroids[0]))
+        t = librosa.frames_to_time(frames)
+        return spectral_centroids, t
+
+    # Normalising the spectral centroid for visualisation
+    def normalize(self, x, axis=0):
+        return sklearn.preprocessing.minmax_scale(x, axis=axis)
