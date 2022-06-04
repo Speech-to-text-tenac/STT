@@ -60,6 +60,13 @@ class AudioUtil():
             self.logger.error(e)
             sys.exit(1)
 
+    def normalize_audio(self, signal):
+        """Audio normalization."""
+        feats_mean = np.mean(signal, axis=0)
+        feats_std = np.std(signal, axis=0)
+        signal = (signal - feats_mean) / (feats_std + 1e-14)
+        return signal
+
     def resize_audio(self, audios: dict, max_duration: float) -> dict:
         """Extend duration of audio samples to max_duration.
 
@@ -84,6 +91,11 @@ class AudioUtil():
         # ----------------------------
         # Show a widget to play the audio sound
         # ----------------------------
+
+    def trim_audio(self, signal, trim_db=None):
+        """Trim the audio signal."""
+        signal, index = librosa.effects.trim(signal, top_db=trim_db)
+        return signal
 
     def play(self, aud):
         """Play the audio signal."""
@@ -121,6 +133,15 @@ class AudioUtil():
                 'Failed to resample audio')
             self.logger.error(e)
             sys.exit(1)
+
+    def split_audio(self, signal, clean_db=None):
+        """Split the audio signal into clean and noisy parts."""
+        yt = librosa.effects.split(signal, top_db=clean_db)
+        cleaned_signal = []
+        for start_i, end_i in yt:
+            cleaned_signal.append(signal[start_i: end_i])
+            signal = np.concatenate(np.array(cleaned_signal), axis=0)
+        return signal
 
     # ----------------------------
     # Pad (or trim) the signal to a fixed length 'max_ms' in milliseconds
