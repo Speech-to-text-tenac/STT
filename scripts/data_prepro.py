@@ -73,6 +73,22 @@ class AudioUtil():
             resized_audios[label] = librosa.util.fix_length(audios[label],size=int(max_duration*44100))
         return resized_audios
 
+
+    def augment_audio(self, audios : dict, sample_rate : int) -> dict:
+        for name in audios:
+            audios[name] = np.roll(audios[name], int(sample_rate/10))
+        return audios
+
+    def plot_spec(self, data:np.array,sr:int) -> None:
+        '''
+        Function for plotting spectrogram along with amplitude wave graph
+        '''
+        fig, ax = plt.subplots(1,2,figsize=(15,5))
+        ax[0].title.set_text(f'Shfiting the wave by Times {sr/10}')
+        ax[0].specgram(data,Fs=2)
+        ax[1].set_ylabel('Amplitude')
+        ax[1].plot(np.linspace(0,1,len(data)), data)
+
     # def resize_audio(self, audios: dict, max_duration: float) -> dict:
     #     """Extend duration of audio samples to max_duration.
 
