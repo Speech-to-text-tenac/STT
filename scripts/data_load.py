@@ -84,7 +84,7 @@ class DataLoader:
         text = []
         duration = []
         try:
-            with open(file_path) as fp:
+            with open(file_path, 'r', encoding='utf-8') as fp:
                 Lines = fp.readlines()
                 for line in Lines:
                     valid_json = {}

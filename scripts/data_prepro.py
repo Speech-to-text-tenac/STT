@@ -31,15 +31,15 @@ class AudioUtil():
 
     def open(self, audio_file):
         """Load an audio file. Return the signal as a tensor and the sample rate."""
-        try:
-            # self.logger.info(
-            #     'Opening audio file for data preprocessing')
-            sig, sr = torchaudio.load(audio_file)
-            return (sig, sr)
-        except Exception as e:
-            # self.logger.error('Failed to load data')
-            # self.logger.error(e)
-            sys.exit(1)
+        # try:
+        #     # self.logger.info(
+        #     #     'Opening audio file for data preprocessing')
+        #     sig, sr = torchaudio.load(audio_file)
+        #     return (sig, sr)
+        # except Exception as e:
+        #     # self.logger.error('Failed to load data')
+        #     # self.logger.error(e)
+        #     sys.exit(1)
 
     def convert_to_stereo(self, audio_path, dest_path, new_channel) -> None:
         """Convert the audio to stereo."""
