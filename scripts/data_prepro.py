@@ -10,7 +10,8 @@ import numpy as np
 from IPython.display import Audio, display
 from pydub import AudioSegment
 from scipy.io import wavfile  # for audio processing
-# from torchaudio import transforms
+from numpy.lib.stride_tricks import as_strided
+from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 warnings.filterwarnings("ignore")
 
@@ -89,28 +90,112 @@ class AudioUtil():
         ax[1].set_ylabel('Amplitude')
         ax[1].plot(np.linspace(0,1,len(data)), data)
 
-    # def resize_audio(self, audios: dict, max_duration: float) -> dict:
-    #     """Extend duration of audio samples to max_duration.
+    
+    def spectrogram(self, samples, fft_length=256, sample_rate=2, hop_length=128):
+        """
+        Compute the spectrogram for a real signal.
+        The parameters follow the naming convention of
+        matplotlib.mlab.specgram
+        
+        This code was obtained from the notebook provided by @Desmond, one of the tutors at 10Academy batch 5 training
 
-    #     Args:
-    #             audios (dict): Dictionary of audio samples.
-    #             max_duration (float): The duration to set for the audio samples
+        Args:
+            samples (1D array): input audio signal
+            fft_length (int): number of elements in fft window
+            sample_rate (scalar): sample rate
+            hop_length (int): hop length (relative offset between neighboring
+                fft windows).
 
-    #     Returns:
-    #             dict: Dictionary of resized audio samples.
-    #     """
-    #     try:
-    #         # self.logger.info("Resizing audio samples")
-    #         resized_audios = {}
-    #         for label in audios:
-    #             resized_audios[label] = librosa.util.fix_length(
-    #                 audios[label], size=int(max_duration*44100))
-    #         return resized_audios
-    #     except Exception as e:
-    #         # self.logger.error('Failed to resize audio')
-    #         # self.logger.error(e)
-    #         sys.exit(1)
-        # ----------------------------
-        # Show a widget to play the audio sound
-        # ----------------------------
+        Returns:
+            x (2D array): spectrogram [frequency x time]
+            freq (1D array): frequency of each row in x
 
+        Note:
+            This is a truncating computation e.g. if fft_length=10,
+            hop_length=5 and the signal has 23 elements, then the
+            last 3 elements will be truncated.
+        """
+        assert not np.iscomplexobj(samples), "Must not pass in complex numbers"
+
+        window = np.hanning(fft_length)[:, None]
+        window_norm = np.sum(window**2)
+
+        # The scaling below follows the convention of
+        # matplotlib.mlab.specgram which is the same as
+        # matlabs specgram.
+        scale = window_norm * sample_rate
+
+        trunc = (len(samples) - fft_length) % hop_length
+        x = samples[:len(samples) - trunc]
+
+        # "stride trick" reshape to include overlap
+        nshape = (fft_length, (len(x) - fft_length) // hop_length + 1)
+        nstrides = (x.strides[0], x.strides[0] * hop_length)
+        x = as_strided(x, shape=nshape, strides=nstrides)
+
+        # window stride sanity check
+        assert np.all(x[:, 1] == samples[hop_length:(hop_length + fft_length)])
+
+        # broadcast window, compute fft over columns and square mod
+        x = np.fft.rfft(x * window, axis=0)
+        x = np.absolute(x)**2
+
+        # scale, 2.0 for everything except dc and fft_length/2
+        x[1:-1, :] *= (2.0 / scale)
+        x[(0, -1), :] /= scale
+
+        freqs = float(sample_rate) / fft_length * np.arange(x.shape[0])
+
+        return x, freqs
+
+    
+    
+
+    def mfcc(self, audio, sampling_rate):
+        """
+        This function computes the Mel frequency cepstral coefficients (MFCCs) of an audio signal
+
+        Precondition:
+            librosa is installed in the active environmen
+
+        Args:
+            audio: (1D array) The input audio signal
+            sampling_rate: (scalar) The sampling rate of the audio signal
+        """
+        return librosa.feature.mfcc(audio, sr=sampling_rate)
+
+
+    def plot_mfcc(self, mfccs, sampling_rate):
+        """
+        This function plots the mfccs of an audio signal
+
+        Precondition:
+            librosa is installed in the active environment
+
+        Args:
+            mfccs: Mel frequency cepstral coefficient of the audio signal
+            sampling_rate: (scalar) The sampling rate of the audio signal
+        """
+        librosa.display.specshow(mfccs, sr=sampling_rate, x_axis='time')
+
+
+    def plot_spectrogram(self, vis_spectrogram_feature):
+            """
+            This function plots a normalized spectogram
+            This code was obtained from the notebook provided by @Desmond, one of the tutors at 10Academy batch 5 training
+
+
+            Args:
+            vis_spectogram_feature: 2D array of the spectogram to visualize
+            """
+            # plot the normalized spectrogram
+            fig = plt.figure(figsize=(12,5))
+            ax = fig.add_subplot(111)
+            im = ax.imshow(vis_spectrogram_feature, cmap=plt.cm.jet, aspect='auto')
+            plt.title('Spectrogram')
+            plt.ylabel('Time')
+            plt.xlabel('Frequency')
+            divider = make_axes_locatable(ax)
+            cax = divider.append_axes("right", size="5%", pad=0.05)
+            plt.colorbar(im, cax=cax)
+            plt.show()
