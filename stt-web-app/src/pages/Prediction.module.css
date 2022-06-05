@@ -1,6 +1,61 @@
 .display {
-    background-color: azure;
+  /* background-color: rgb(12, 212, 212);
     height: 10rem;
     width: 8rem;
-    color: blue;
+    color: blue; */
+}
+
+.display button {
+  border: none;
+  padding: 1rem;
+  margin-right: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 5rem;
+  background-color: tomato;
+  font-size: 1.3rem;
+  color: white;
+}
+
+.display button:hover {
+  transform: translateY(2px);
+  transition: 0.5s;
+}
+
+.display audio {
+  margin-left: -4rem;
+  background-color: tomato;
+}
+
+.display section {
+  background-color: rgb(226, 226, 2);
+  font-family: "Cinzel", serif;
+  margin-top: 4rem;
+  margin-left: -17rem;
+  max-width: 120%;
+  padding: 3rem;
+}
+
+.upload {
+    
+}
+
+.upload section {
+   margin-top: 5rem;
+}
+
+.upload button {
+    border: none;
+    padding: 1rem;
+    margin-right: 10px;
+    cursor: pointer;
+    width: 7rem;
+    background-color: tomato;
+    font-size: 1.3rem;
+    color: white;
+    border-radius: 3px;
+}
+
+.upload button:hover {
+    transform: translateY(5px);
 }

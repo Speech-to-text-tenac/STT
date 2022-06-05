@@ -10,14 +10,14 @@
 
 .logo {
   font-size: 2rem;
-  color: rgb(14, 12, 12);
+  /* color: rgb(236, 9, 9); */
   font-weight: bold;
   margin-left: -12rem;
   margin-top: 2rem;
 }
 
 .container ul {
-  background-color: #007377;
+  background-color: rgb(189, 189, 19);
   list-style: none;
   margin-top: 50rem;
   padding: 2rem;
@@ -32,14 +32,15 @@
 .container li {
   border: rgb(199, 199, 199);
   border-radius: 5px;
-  width: 90%;
+  width: 98%;
   padding: 1rem;
   margin-bottom: 10px;
-  background-color: #2eabaf;
+  background-color: rgb(26, 26, 3);
 }
 .container li:hover {
-  filter: brightness(110%);
+  filter: brightness(180%);
   transition: 0.4s;
+  cursor: pointer;
 }
 
 .container  a {
@@ -52,6 +53,6 @@
 .container  a:hover,
 .container  a:active,
 .container  a.active {
-  color: rgb(19, 18, 18);
+  color: rgb(255, 255, 255);
 }
 
