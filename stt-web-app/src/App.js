@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+//import { MainNavigation } from "./components/layout/MainNavigation";
+import { Prediction } from "./pages/Prediction";
+import { Spectogram } from "./pages/Spectogram";
 
+import { Layout } from "./components/layout/Layout";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout className="">
+    {/* // <MainNavigation> */}
+    <Routes>
+      <Route path="/" element={<Prediction />} />
+      <Route path="/spectogram" element={<Spectogram />} />
+    </Routes>
+    {/* </MainNavigation> */}
+     </Layout>
   );
 }
 
 export default App;
+
+
