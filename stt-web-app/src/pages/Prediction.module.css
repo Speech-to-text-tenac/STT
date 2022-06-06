@@ -1,8 +1,50 @@
-.display {
-  /* background-color: rgb(12, 212, 212);
-    height: 10rem;
-    width: 8rem;
-    color: blue; */
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.link {
+  display: flex;
+  margin-left: -20rem;
+}
+
+.link span {
+  height: 30px;
+  width: 30px;
+  background-color: yellow;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.link span:hover {
+    filter: brightness(100%);
+    background-color: rgb(235, 235, 9);
+}
+
+.link ul {
+  list-style-type: none;
+  background-color: tomato;
+  padding: 1rem;
+  height: 6.3rem;
+}
+
+.link li {
+  margin-bottom: 14px;
+}
+
+.link a {
+  text-decoration: none;
+  color: white;
+}
+
+.link a:hover{
+    color: #000;
+    transition: 0.5s;
+}
+
+.link ul:hover {
+  filter: brightness(110%);
+  transition: 0.5s;
 }
 
 .display button {
@@ -32,30 +74,45 @@
   font-family: "Cinzel", serif;
   margin-top: 4rem;
   margin-left: -17rem;
-  max-width: 120%;
+  max-width: 140%;
   padding: 3rem;
 }
 
-.upload {
-    
-}
-
-.upload section {
-   margin-top: 5rem;
+.upload div {
+  margin-top: 5rem;
 }
 
 .upload button {
-    border: none;
-    padding: 1rem;
-    margin-right: 10px;
-    cursor: pointer;
-    width: 7rem;
-    background-color: tomato;
-    font-size: 1.3rem;
-    color: white;
-    border-radius: 3px;
+  border: none;
+  padding: 1rem;
+  margin-right: 10px;
+  cursor: pointer;
+  width: 7rem;
+  background-color: tomato;
+  font-size: 1.3rem;
+  color: white;
+  border-radius: 3px;
+}
+
+.upload input[type="file"] {
+  color: yellow;
 }
 
 .upload button:hover {
-    transform: translateY(5px);
+  transform: translateY(-2px);
+  transition: 0.5s;
+  filter: brightness(110%);
+}
+
+.upload section {
+  background-color: rgb(226, 226, 2);
+  font-family: "Cinzel", serif;
+  margin-top: 4rem;
+  margin-left: -17rem;
+  max-width: 140%;
+  padding: 3rem;
+}
+
+.upload div {
+  margin-right: 5rem ;
 }

@@ -1,26 +1,15 @@
 import classesp from "./Prediction.module.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import React, { useState } from "react";
 
 let gumStream = null;
 let recorder = null;
 let audioContext = null;
 
 export const Prediction = () => {
-  // return (
-  //   <>
-  //     {/* <div> */}
-  //     <div>
-  //       <h2>Prediction</h2>
-  //       <input type="file"></input>
-  //       <button>predict</button>
-  //     </div>
-
-  //     <div>
-  //       <h2>output</h2>
-  //     </div>
-  //     {/* </div> */}
-  //   </>
-  // );
+  const [show, setShow] = useState(false);
+  const [Display, Upload] = useState(true);
   const startRecording = () => {
     let constraints = {
       audio: true,
@@ -80,28 +69,55 @@ export const Prediction = () => {
 
   return (
     <>
-      {/* <div className={classesp.display}>
-        <button onClick={startRecording} type="button">
-          Start
-        </button>
-        <button onClick={stopRecording} type="button">
-          Stop
-        </button>
-        <br></br>
-        <br></br>
-        <audio autoplay controls></audio>
+      <div className={classesp.container}>
+        <div className={classesp.link}>
+          <span title="choose" onClick={()=>setShow(!show)}></span>
+          {/* <br></br>
+        <span></span> */}
+        { show?
+          <ul>
+            <li>
+              <Link to="">Record Audio</Link>
+            </li>
+            <hr></hr>
+            <li>
+              <Link to="">Upload Audio</Link>
+            </li>
+          </ul>:null
+         }
+        </div>
+        <div>
+          <div className={classesp.display}>
+            <div>
+            <h2>Record Audio</h2>
+            <button onClick={startRecording} type="button">
+              Start
+            </button>
+            <button onClick={stopRecording} type="button">
+              Stop
+            </button>
+            <br></br>
+            <br></br>
+            <audio autoplay controls></audio>
+            </div>
+            <section>
+              <p>HELLO, EVERYONE</p>
+            </section>
+          </div>
 
-        <section>
-          <p>HELLO, EVERYONE</p>
-        </section>
-      </div> */}
-
-      <div className={classesp.upload}>
-        <h2>Upload Audio</h2>
-        <section>
-          <input type="file" />
-          <button>Predict</button>
-        </section>
+          <div className={classesp.upload}>
+            <div>
+            <h2>Upload Audio</h2>
+            <div>
+              <input type="file" />
+              <button>Predict</button>
+            </div>
+           </div>
+            <section>
+              <p>HELLO, EVERYONE</p>
+            </section>
+          </div>
+        </div>
       </div>
     </>
   );

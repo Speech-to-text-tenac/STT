@@ -7,7 +7,9 @@
 body {
   font-family: 'Open Sans', sans-serif;
   margin: 0;
-  background-color: #0a0a0a;
+  background-image: url('../public/milad.jpg');
+  /* background-repeat: no-repeat; */
+  background-size: contain;
 }
 
 h1 {
@@ -18,5 +20,6 @@ h1 {
 
 h2 {
   font-size: 2.8rem;
-  color: #dd0896;
+  color: tomato;
+  margin-left: -3.6rem;
 }
