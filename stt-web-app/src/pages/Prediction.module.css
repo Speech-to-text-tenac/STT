@@ -47,6 +47,16 @@
   transition: 0.5s;
 }
 
+.display {
+ margin-top: -2rem;
+}
+.upload {
+  margin-top: -3rem;
+}
+.display main {
+   margin-left: -31rem;
+}
+
 .display button {
   border: none;
   padding: 1rem;
@@ -65,16 +75,17 @@
 }
 
 .display audio {
-  margin-left: -4rem;
+  margin-left: -35rem;
   background-color: tomato;
 }
 
 .display section {
-  background-color: rgb(226, 226, 2);
+  background-color: rgba(255, 255, 0, 0.9);
   font-family: "Cinzel", serif;
   margin-top: 4rem;
-  margin-left: -17rem;
-  max-width: 140%;
+  margin-left: -47rem;
+  margin-right: 3rem;
+  /* max-width: 100rem; */
   padding: 3rem;
 }
 
@@ -105,7 +116,7 @@
 }
 
 .upload section {
-  background-color: rgb(226, 226, 2);
+  background-color: rgba(189, 189, 19,0.9);
   font-family: "Cinzel", serif;
   margin-top: 4rem;
   margin-left: -17rem;

@@ -1,5 +1,6 @@
-import { ReactMediaRecorder, useReactMediaRecorder } from "react-media-recorder"
-import classesp from "./Prediction.module.css";
+import { ReactMediaRecorder} from "react-media-recorder"
+//import { ReactMediaRecorder, useReactMediaRecorder } from "react-media-recorder"
+import classes from "./Spectogram.module.css";
 //import AudioReactRecorder, { RecordState } from 'audio-react-recorder'
 
 export const Spectogram = () => {
@@ -8,7 +9,7 @@ export const Spectogram = () => {
     <ReactMediaRecorder
       audio
       render={({ status, startRecording, stopRecording, mediaBlobUrl }) => (
-        <div className={classesp.display}>
+        <div className={classes.display}>
           <p>{status}</p>
           <button onClick={startRecording}>Start</button>
           <button onClick={stopRecording}>Stop</button>

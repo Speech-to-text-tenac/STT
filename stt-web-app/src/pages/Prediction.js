@@ -9,7 +9,7 @@ let audioContext = null;
 
 export const Prediction = () => {
   const [show, setShow] = useState(false);
-  const [Display, Upload] = useState(true);
+  const [view, setView] = useState(true);
   const startRecording = () => {
     let constraints = {
       audio: true,
@@ -71,52 +71,60 @@ export const Prediction = () => {
     <>
       <div className={classesp.container}>
         <div className={classesp.link}>
-          <span title="choose" onClick={()=>setShow(!show)}></span>
+          <span title="choose" onClick={() => setShow(!show)}></span>
           {/* <br></br>
         <span></span> */}
-        { show?
-          <ul>
-            <li>
-              <Link to="">Record Audio</Link>
-            </li>
-            <hr></hr>
-            <li>
-              <Link to="">Upload Audio</Link>
-            </li>
-          </ul>:null
-         }
+          {show ? (
+            <ul>
+              <li>
+                <Link to="" onClick={() => setView(true)}>
+                  Record Audio
+                </Link>
+              </li>
+              <hr></hr>
+              <li>
+                <Link to="" onClick={() => setView(false)}>
+                  Upload Audio
+                </Link>
+              </li>
+            </ul>
+          ) : null}
         </div>
         <div>
-          <div className={classesp.display}>
-            <div>
-            <h2>Record Audio</h2>
-            <button onClick={startRecording} type="button">
-              Start
-            </button>
-            <button onClick={stopRecording} type="button">
-              Stop
-            </button>
-            <br></br>
-            <br></br>
-            <audio autoplay controls></audio>
+          {view ? (
+            <div className={classesp.display}>
+              <div>
+                <main>
+                <h2>Record Audio</h2>                
+                <button onClick={startRecording} type="button">
+                  Start
+                </button>
+                <button onClick={stopRecording} type="button">
+                  Stop
+                </button>
+                </main>
+                <br></br>
+                <br></br>
+                <audio autoplay controls></audio>
+              </div>
+              <section>
+                <p>HELLO, EVERYONE</p>
+              </section>
             </div>
-            <section>
-              <p>HELLO, EVERYONE</p>
-            </section>
-          </div>
-
-          <div className={classesp.upload}>
-            <div>
-            <h2>Upload Audio</h2>
-            <div>
-              <input type="file" />
-              <button>Predict</button>
+          ) : (
+            <div className={classesp.upload}>
+              <div>
+                <h2>Upload Audio</h2>
+                <div>
+                  <input type="file" />
+                  <button>Predict</button>
+                </div>
+              </div>
+              <section>
+                <p>HELLO, EVERYONE</p>
+              </section>
             </div>
-           </div>
-            <section>
-              <p>HELLO, EVERYONE</p>
-            </section>
-          </div>
+          )}
         </div>
       </div>
     </>
