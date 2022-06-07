@@ -6,3 +6,6 @@
 /train_corpus.csv
 /test.json
 /train.json
+/meta_data.csv
+/audio_dict.pkl
+/translation_obj.pkl
