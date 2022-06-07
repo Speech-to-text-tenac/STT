@@ -1,0 +1,4 @@
+outs:
+- md5: 94d28fdd8c839b0a044e54091bd3b3f5
+  size: 62976
+  path: test_translation_dict.pkl
