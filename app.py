@@ -19,13 +19,17 @@ app = Flask(__name__)
 CORS(app)  # This will enable CORS for all routes
 
 
-@app.route('/', methods=['GET'])
-def index():
-    # Main page
-    return {
-        "status": "sucess",
-        "message": "Hello World"
-    }
+@app.route("/")
+def home_view():
+    return "<h1>Welcome to STT engine for Amharic language</h1>"
+
+# @app.route('/', methods=['GET'])
+# def index():
+#     # Main page
+#     return {
+#         "status": "sucess",
+#         "message": "Hello World"
+#     }
 
 
 if __name__ == '__main__':
