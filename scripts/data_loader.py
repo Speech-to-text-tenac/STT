@@ -1,151 +1,94 @@
-"""Load Audio data from a directory."""
-
-import json
-import os
-import sys
-
-import librosa
+import librosa  # for audio processing
+import librosa.display
 import pandas as pd
-from glob import glob
-from logger import Logger
+import os
 
 
 class DataLoader:
-    def __init__(self, data_dir, sample_rate=16000, max_duration=10.0,
-                 max_samples=None, max_files=None, verbose=True):
-        """Load audio data from a directory."""
-        try:
-            self.logger = Logger("load_data.log").get_app_logger()
-            self.logger.info(
-                'Successfully Instantiated DataLoader Class Object')
-            self.data_dir = data_dir
-            self.sample_rate = sample_rate
-            self.max_duration = max_duration
-        except Exception as e:
-            self.logger.error(
-                'Failed to Instantiate LoadData Class Object')
-            self.logger.error(e)
-            sys.exit(1)
 
-    def load_audios(self, mono: bool, no_of_audios: int = 100) -> tuple:
-        """Load the audio files from a folder.
+    def __init__(self, train_audio_folder, train_script_file_path, sr=8000):
+        self.train_audio_folder = train_audio_folder
+        self.train_script_file_path = train_script_file_path
+        self.sr = sr
 
-        Args:
-            mono (bool): whether to load the audio as mono or not
-            no_of_audios (int): Number of files to load
+    def extract_transcription_and_labels(self):
 
-        Returns:
-            tuple: Dictionary of sampled audios and Maximum duration of audios
-        """
-        try:
-            self.logger.info(
-                'Loading audio files')
-            audio_data = {}
-            max_duration = 0
-            for i, file in enumerate(os.listdir(self.data_dir)):
-                if i > no_of_audios:
-                    break
-                sampled_audio, sample_rate = librosa.load(
-                    self.data_dir+file, sr=self.sample_rate, mono=mono)
-                max_duration = max(len(sampled_audio) /
-                                   sample_rate, max_duration)
-                audio_data[file.split('.')[0]] = sampled_audio
+        file_path = self.train_script_file_path
 
-            return audio_data, max_duration
-        except Exception as e:
-            self.logger.error('Failed to load data')
-            self.logger.error(e)
-            sys.exit(1)
+        transcriptions = []
+        with open(file_path) as f:
+            line = f.readline()
+            while (line):
+                transcriptions.append(line)
+                line = f.readline()
 
-    def get_wav_files(self) -> list:
-        """Get the wav files from a folder.
+        label_trans_dict = dict()
+        for trans in transcriptions:
+            text = trans.replace("<s>", "").replace("</s>", "")
+            text = text.replace("</s>", "")
+            text = text.strip()
 
-        Args:
-            path (str): Path to the folder
+            label = text.split()[-1]
 
-        Returns:
-            list: List of wav files
-        """
-        try:
-            self.logger.info('Getting wav files')
-            path = self.data_dir
-            path = path + '*.wav'
-            wav_files = glob(path)
-            self.logger.info('Successfully got wav files')
-            return wav_files
-        except Exception as e:
-            self.logger.error('Failed to get wav files')
-            self.logger.error(e)
-            sys.exit(1)
+            try:
+                label = label.replace("(", "")
+                label = label.replace(")", "")
+            except:
+                pass
 
-    def load_transcription(self, file_path: str, dest_path: str, save=False) -> dict:
-        """Load transcription data"""
+            translation = text.split()[:-1]
+            translation = ' '.join(translation)
 
-        audio_path = []
-        text = []
-        duration = []
-        try:
-            with open(file_path) as fp:
-                Lines = fp.readlines()
-                for line in Lines:
-                    valid_json = {}
-                    val = line.split(' ')[1:]
-                    val = ' '.join(val)
-                    # Remove any new line character
-                    val = val.replace("\n", "").strip()
-                    path = line.split(' ')[0]
+            label_trans_dict[label] = translation
 
-                    path = '../data/AMHARIC/data/train/wav/' + path + '.wav'
-                    audios = self.get_wav_files()
-                    if path not in audios:
-                        continue
+        return label_trans_dict
 
-                    audio_path.append(path)
-                    text.append(val)
-                    duration.append(librosa.get_duration(filename=path))
-                    valid_json['text'] = val
-                    valid_json['key'] = path
-                    # GEt the duration of the audio file
-                    valid_json['duration'] = librosa.get_duration(
-                        filename=path)
-                    if save:
-                        with open(dest_path, 'a', encoding='utf-8') as fp:
-                            fp.write(json.dumps(
-                                valid_json, ensure_ascii=False))
-                            fp.write("\n")
-            self.logger.info('Successfully loaded transcription data')
-            self.logger.info(
-                'Total number of files: {}'.format(len(audio_path)))
-            return audio_path, text, duration
-        except Exception as e:
-            self.logger.error('Failed to load transcription data')
-            self.logger.error(e)
-            sys.exit(1)
+    def extract_audio(self, no_of_audios=10000, sr=16000):
 
-    def generate_meta_data(self, path, dest_path):
-        """Generate meta data csv"""
+        path = self.train_audio_folder
 
-        try:
-            self.logger.info('Generating meta data csv')
-            audio_path, text, duration = self.load_transcription(
-                path, dest_path)
-            data = pd.DataFrame(
-                {'key': audio_path, 'text': text, 'duration': duration})
-            data.to_csv(dest_path, index=False)
-            print("Meta data creatwd successfully")
-            self.logger.info('Successfully generated meta data csv')
-        except Exception as e:
-            self.logger.error('Failed to generate meta data csv')
-            self.logger.error(e)
-            sys.exit(1)
+        wav_dict = dict()
+        wav_paths = self.get_all_wav_paths(path)
+        for path in wav_paths:
+            if len(list(wav_dict.keys())) >= no_of_audios:
+                break
+            wav, sample_rate = librosa.load(
+                self.train_audio_folder+path, sr=self.sr)
+            dur = float(len(wav)/sample_rate)
+            channel = len(wav.shape)
+            label = path.split(".")[0]
+            wav_dict[label] = (wav, dur, channel, sample_rate)
 
-    def read_csv(self, csv_file) -> pd.DataFrame:
-        """Csv file reader to open and read csv files into a panda dataframe.
-        Args:
-        -----
-        csv_file: str - path of a json file
+        return wav_dict
 
-        Returns
-        -------
-        dataframe containing data extracted from the csv file"""
-        return pd.read_csv(csv_file)
+    def get_all_wav_paths(self, folder_path):
+        return os.listdir(folder_path)
+
+    def create_meta_data(self, transcripton_obj, audio_obj):
+        translations = []
+        durations = []
+        labels = []
+        channels = []
+        srs = []
+        for k in audio_obj.keys():
+            trans = transcripton_obj[k]
+            label = k
+
+            duration = audio_obj[k][1]
+            channel = audio_obj[k][2]
+            sr = audio_obj[k][3]
+
+            translations.append(trans)
+            durations.append(duration)
+            labels.append(label)
+            channels.append(channel)
+            srs.append(sr)
+
+            m_df = pd.DataFrame()
+            m_df["translation"] = translations
+            m_df["label"] = labels
+            m_df["channel"] = channels
+            m_df["sample_rate"] = srs
+            m_df["duration"] = durations
+
+        return m_df
