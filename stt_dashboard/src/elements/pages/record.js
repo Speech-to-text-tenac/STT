@@ -52,6 +52,7 @@ export default class Records extends React.Component {
           handleOnChange={(value) => this.handleOnChange(value, "firstname")}
           handleAudioUpload={(data) => this.handleAudioUpload(data)}
           handleRest={() => this.handleRest()}
+          
         />
       </div>
     );
