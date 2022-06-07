@@ -2,7 +2,6 @@ import classesp from "./Prediction.module.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
-
 let gumStream = null;
 let recorder = null;
 let audioContext = null;
@@ -15,7 +14,7 @@ export const Prediction = () => {
       audio: true,
       video: false,
     };
-  
+
     audioContext = new window.AudioContext();
     console.log("sample rate: " + audioContext.sampleRate);
 
@@ -27,19 +26,19 @@ export const Prediction = () => {
         gumStream = stream;
 
         let input = audioContext.createMediaStreamSource(stream);
-        console.log(input)
-        
+        console.log(input);
+
         recorder = new window.Recorder(input, {
           numChannels: 1,
         });
-        
+
         console.log(recorder);
         recorder.record();
         console.log("Recording started");
       })
       .catch(function (err) {
         //enable the record button if getUserMedia() fails
-        console.log(err)
+        console.log(err);
       });
   };
 
@@ -63,9 +62,32 @@ export const Prediction = () => {
     const config = {
       headers: { "content-type": "multipart/form-data" },
     };
-    console.log(data)
+    console.log(data);
     axios.post("http://localhost:8080/asr/", data, config);
   };
+
+  const [file, setFile] = useState();
+
+  function handleChange(event) {
+    setFile(event.target.files[0]);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    //const url = "http://localhost:3000/uploadFile";
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("fileName", file.name);
+    console.log(file.name);
+    // const config = {
+    //   headers: {
+    //     "content-type": "multipart/form-data",
+    //   },
+    // };
+    // axios.post(url, formData, config).then((response) => {
+    //   console.log(response.data);
+    // });
+  }
 
   return (
     <>
@@ -95,17 +117,17 @@ export const Prediction = () => {
             <div className={classesp.display}>
               <div>
                 <main>
-                <h2>Record Audio</h2>                
-                <button onClick={startRecording} type="button">
-                  Start
-                </button>
-                <button onClick={stopRecording} type="button">
-                  Stop
-                </button>
+                  <h2>Record Audio</h2>
+                  <button onClick={startRecording} type="button">
+                    Start
+                  </button>
+                  <button onClick={stopRecording} type="button">
+                    Stop
+                  </button>
                 </main>
                 <br></br>
                 <br></br>
-                <audio autoplay controls></audio>
+                <audio autoPlay controls></audio>
               </div>
               <section>
                 <p>HELLO, EVERYONE</p>
@@ -116,8 +138,11 @@ export const Prediction = () => {
               <div>
                 <h2>Upload Audio</h2>
                 <div>
-                  <input type="file" />
-                  <button>Predict</button>
+                  <form onSubmit={handleSubmit}>
+                    <h1>React File Upload</h1>
+                    <input type="file" onChange={handleChange} />
+                    <button type="submit">Upload</button>
+                  </form>
                 </div>
               </div>
               <section>
@@ -130,4 +155,3 @@ export const Prediction = () => {
     </>
   );
 };
-
