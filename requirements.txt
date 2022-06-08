@@ -4,6 +4,7 @@ Flask-Cors==3.0.10
 flatbuffers==1.12
 gast==0.4.0
 gevent==21.12.0
+gunicorn
 grpcio==1.46.3
 h5py==3.7.0
 itsdangerous==2.1.2
