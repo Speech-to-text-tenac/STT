@@ -1,8 +1,8 @@
 import math, random
-import torch
+# import torch
 from IPython.display import Audio, display
-import torchaudio
-from torchaudio import transforms
+# import torchaudio
+# from torchaudio import transforms
 import librosa   #for audio processing
 import matplotlib.pyplot as plt
 import numpy as np
@@ -16,8 +16,9 @@ class AudioUtil():
   # ----------------------------
   @staticmethod
   def open(audio_file):
-    sig, sr = torchaudio.load(audio_file)
-    return (sig, sr)
+    pass
+    # sig, sr = torchaudio.load(audio_file)
+    # return (sig, sr)
   
   # ----------------------------
   # Show a widget to play the audio sound
@@ -41,7 +42,8 @@ class AudioUtil():
         resig = sig[:1, :]
     else:
         # Convert from mono to stereo by duplicating the first channel
-        resig = torch.cat([sig, sig])
+        # resig = torch.cat([sig, sig])
+        pass
 
     return ((resig, sr))
 
@@ -68,13 +70,13 @@ class AudioUtil():
 
     num_channels = sig.shape[0]
     # Resample first channel
-    resig = torchaudio.transforms.Resample(sr, newsr)(sig[:1,:])
+    # resig = torchaudio.transforms.Resample(sr, newsr)(sig[:1,:])
     if (num_channels > 1):
       # Resample the second channel and merge both channels
-      retwo = torchaudio.transforms.Resample(sr, newsr)(sig[1:,:])
-      resig = torch.cat([resig, retwo])
-
-    return ((resig, newsr))
+      # retwo = torchaudio.transforms.Resample(sr, newsr)(sig[1:,:])
+      # resig = torch.cat([resig, retwo])
+      return
+    # return ((resig, newsr))
 
   # ----------------------------
   # Pad (or trim) the signal to a fixed length 'max_ms' in milliseconds
@@ -95,10 +97,10 @@ class AudioUtil():
       pad_end_len = max_len - sig_len - pad_begin_len
 
       # Pad with 0s
-      pad_begin = torch.zeros((num_rows, pad_begin_len))
-      pad_end = torch.zeros((num_rows, pad_end_len))
+      # pad_begin = torch.zeros((num_rows, pad_begin_len))
+      # pad_end = torch.zeros((num_rows, pad_end_len))
 
-      sig = torch.cat((pad_begin, sig, pad_end), 1)
+      # sig = torch.cat((pad_begin, sig, pad_end), 1)
       
     return (sig, sr)
 
@@ -122,15 +124,18 @@ class AudioUtil():
 
     # spec has shape [channel, n_mels, time], where channel is mono, stereo etc
     if (spectro_type == 'mel'):
-      spec = transforms.MelSpectrogram(sr, n_fft, ws, hop_len, f_min, f_max, pad, n_mels)(sig)
+      pass
+      # spec = transforms.MelSpectrogram(sr, n_fft, ws, hop_len, f_min, f_max, pad, n_mels)(sig)
     elif (spectro_type == 'mfcc'):
       pass
     else: 
-      spec = transforms.Spectrogram(n_fft, ws, hop_len, pad, normalize=False)(sig)
+      pass
+      # spec = transforms.Spectrogram(n_fft, ws, hop_len, pad, normalize=False)(sig)
 
     # Convert to decibels
-    spec = transforms.AmplitudeToDB(top_db=top_db)(spec)
-    return (spec)
+    # spec = transforms.AmplitudeToDB(top_db=top_db)(spec)
+    return
+    # return (spec)
 
 
   # ----------------------------
