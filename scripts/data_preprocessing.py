@@ -12,7 +12,7 @@ from IPython.display import Audio, display
 from logger import Logger
 from pydub import AudioSegment
 from scipy.io import wavfile  # for audio processing
-from torchaudio import transforms
+# from torchaudio import transforms
 
 warnings.filterwarnings("ignore")
 
@@ -35,8 +35,8 @@ class AudioUtil():
         try:
             self.logger.info(
                 'Opening audio file for data preprocessing')
-            sig, sr = torchaudio.load(audio_file)
-            return (sig, sr)
+            # sig, sr = torchaudio.load(audio_file)
+            # return (sig, sr)
         except Exception as e:
             self.logger.error('Failed to load data')
             self.logger.error(e)
@@ -109,11 +109,12 @@ class AudioUtil():
 
             num_channels = sig.shape[0]
             # Resample first channel
-            resig = torchaudio.transforms.Resample(sr, newsr)(sig[:1, :])
+            # resig = torchaudio.transforms.Resample(sr, newsr)(sig[:1, :])
             if (num_channels > 1):
+                pass
                 # Resample the second channel and merge both channels
-                retwo = torchaudio.transforms.Resample(sr, newsr)(sig[1:, :])
-                resig = torch.cat([resig, retwo])
+                # retwo = torchaudio.transforms.Resample(sr, newsr)(sig[1:, :])
+                # resig = torch.cat([resig, retwo])
 
             return ((resig, newsr))
         except Exception as e:
@@ -183,17 +184,21 @@ class AudioUtil():
 
             # spec has shape [channel, n_mels, time], where channel is mono, stereo etc
             if (spectro_type == 'mel'):
-                spec = transforms.MelSpectrogram(
-                    sr, n_fft, ws, hop_len, f_min, f_max, pad, n_mels)(sig)
+                pass
+                # spec = transforms.MelSpectrogram(
+                #     sr, n_fft, ws, hop_len, f_min, f_max, pad, n_mels)(sig)
             elif (spectro_type == 'mfcc'):
                 pass
             else:
-                spec = transforms.Spectrogram(
-                    n_fft, ws, hop_len, pad, normalize=False)(sig)
+                pass
+                # spec = transforms.Spectrogram(
+                    # n_fft, ws, hop_len, pad, normalize=False)(sig)
 
             # Convert to decibels
-            spec = transforms.AmplitudeToDB(top_db=top_db)(spec)
-            return (spec)
+            # spec = transforms.AmplitudeToDB(top_db=top_db)(spec)
+            # return (spec)
+            return
+            
         except Exception as e:
             self.logger.error('Failed to convert decibels')
             self.logger.error(e)
