@@ -1,18 +1,18 @@
 """Predict on wav data uploaded from user."""
 
 import sys
-
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-import pickle
 import os
 
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), './scripts')))
+from predict import predict
+from char_map import char_map
+from models import model_2
 
 class Prediction:
 
     def __init__(self) -> None:
         """Initilize class."""
+        self.MODEL_NAME = "model_2_stbbli11"
         try:
             pass
         except Exception:
@@ -22,16 +22,6 @@ class Prediction:
         ALLOWED_EXTENSIONS = {'wav'}
         return '.' in filename and \
             filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-    def preprocess(self, path):
-        """."""
-        try:
-            pass
-            # return data
-        except Exception:
-            self.logger.exception(
-                'Failed to get Numerical Columns from Dataframe')
-            sys.exit(1)
 
     def handle_df_upload(self, request, secure_filename, app):
         if request.method == 'POST':
@@ -48,39 +38,29 @@ class Prediction:
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], file_name))
                 full_path = os.path.join(
                     app.config['UPLOAD_FOLDER'], file_name)
-                data = self.preprocess(full_path)
-                print(data)
                 try:
-                    results = self.predict(data)
-                    dates = data.index.values
-                    dates = dates.astype(str).tolist()
-                    sales = list(results)
-                    data = {
-                        "Date": dates,
-                        "Sales": sales
-                    }
-                    return data
+                    results = self.predict_audio(full_path)
+                    return {"status": "success", "message": results}
                 except Exception:
-                    return {"status": "fail", "error": "Failed to predict"}
+                    return {"status": "fail", "error": "Failed to make transcribe audio"}
             else:
                 return {"status": "fail", "error": "Only wave files are allowed"}
         elif request.method == 'GET':
             return {"status": "fail", "error": "Get request not available yet"}
 
-    def predict(self, df):
-        cols = ['StateHoliday', 'Store', 'DayOfWeek', 'Open', 'Promo',
-                'SchoolHoliday', 'Year', 'Month', 'Day', 'WeekOfYear']
-        loaded_model = pickle.load(
-            open("./models/model_2_stbbl.pickle", 'rb'))
-        # loaded_model = pickle.load(open("./models/2022-05-26-10-09-06.pkl", 'rb'))
-        df = df[cols]
-        result = loaded_model.predict(df)
-        result = np.exp(result)
-        date = df.index.values
-
-        new_df = pd.DataFrame()
-        new_df['Date'] = date
-        new_df['Predicted Sales'] = result
-        print("RESULT:", result)
-        # return {"date": date, "sales": result}
-        return result
+    def predict_audio(self, full_path):
+        model = model_2(input_dim=13,
+                filters=200,
+                kernel_size=11, 
+                conv_stride=2,
+                conv_border_mode='valid',
+                units=250,
+                activation='relu',
+                dropout_rate=1,
+                number_of_layers=5,
+                output_dim=len(char_map)+1)
+        model.load_weights('models/' + self.MODEL_NAME + '.h5')
+       
+        predictedd = predict(full_path, model, False)
+        predictedd = predictedd.replace("'", '')
+        return predictedd
