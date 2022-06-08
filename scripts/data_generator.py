@@ -7,13 +7,13 @@ import json
 import numpy as np
 import random
 from python_speech_features import mfcc
-import librosa
+# import librosa
 import scipy.io.wavfile as wav
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
-from utils import calc_feat_dim, spectrogram_from_file, text_to_int_sequence
-from utils import conv_output_length
+from scripts.utils import calc_feat_dim, spectrogram_from_file, text_to_int_sequence
+from scripts.utils import conv_output_length
 
 RNG_SEED = 123
 
@@ -320,7 +320,7 @@ def vis_train_features(index=0):
     # obtain text label
     vis_text = audio_gen.train_texts[index]
     # obtain raw audio
-    vis_raw_audio, _ = librosa.load(amharic_path(vis_audio_path))
+    vis_raw_audio, _ = wav.load(amharic_path(vis_audio_path))
     # print total number of training examples
     print('There are %d total training examples.' %
           len(audio_gen.train_audio_paths))
