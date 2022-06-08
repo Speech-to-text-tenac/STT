@@ -1,6 +1,7 @@
 dvc==2.10.2
 dvc-render==0.0.5
 isort==5.10.1
+librosa
 matplotlib
 mlflow
 numpy==1.22.3
