@@ -37,3 +37,6 @@ tensorflow-io-gcs-filesystem==0.26.0
 Werkzeug==2.1.2
 numpy
 matplotlib
+IPython
+torchaudio
+librosa

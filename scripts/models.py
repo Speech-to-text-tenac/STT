@@ -1,6 +1,6 @@
-from keras import backend as K
-from keras.models import Model
-from keras.layers import (BatchNormalization, Conv1D, Dense, Input,
+from tensorflow.keras import backend as K
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import (BatchNormalization, Conv1D, Dense, Input,
                           TimeDistributed, Activation, Bidirectional, SimpleRNN, GRU, LSTM)
 from keras.utils import plot_model
 
