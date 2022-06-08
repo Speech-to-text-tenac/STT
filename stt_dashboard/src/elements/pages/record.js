@@ -49,10 +49,10 @@ export default class Records extends React.Component {
           audioURL={this.state.audioDetails.url}
           showUIAudio
           handleAudioStop={(data) => this.handleAudioStop(data)}
-          handleOnChange={(value) => this.handleOnChange(value, "firstname")}
+          handleOnChange={(value) => this.handleOnChange(value, "file")}
           handleAudioUpload={(data) => this.handleAudioUpload(data)}
           handleRest={() => this.handleRest()}
-          
+          messures
         />
       </div>
     );
