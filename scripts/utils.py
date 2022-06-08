@@ -10,8 +10,10 @@ import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), './scripts')))
 from char_map import char_map, index_map
 
+
 def calc_feat_dim(window, max_freq):
     return int(0.001 * window * max_freq) + 1
+
 
 def conv_output_length(input_length, filter_size, border_mode, stride,
                        dilation=1):
@@ -123,6 +125,7 @@ def spectrogram_from_file(filename, step=10, window=20, max_freq=None,
         ind = np.where(freqs <= max_freq)[0][-1] + 1
     return np.transpose(np.log(pxx[:ind, :] + eps))
 
+
 def text_to_int_sequence(text):
     """ Convert text to an integer sequence """
     int_sequence = []
@@ -132,15 +135,22 @@ def text_to_int_sequence(text):
         else:
             # print("checking character " + c + " in map:")
             # print(char_map)
-            ch = char_map[c]
+            # check if c exists as a key in char_map
+            if c in char_map:
+                ch = char_map[c]
+            else:
+                ch = char_map['<SPACE>']
+                pass
+                # ch = char_map['<UNK>']
+            # ch = char_map[c]
         int_sequence.append(ch)
     return int_sequence
+
 
 def int_sequence_to_text(int_sequence):
     """ Convert an integer sequence to text """
     text = []
     for c in int_sequence:
-        ch = index_map[c]
+        ch = index_map[c+1]
         text.append(ch)
     return text
-
