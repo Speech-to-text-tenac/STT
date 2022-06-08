@@ -2,16 +2,17 @@
 Defines a functions for training a NN.
 """
 
-from data_generator import AudioGenerator
-from data_generator import make_audio_gen
+# from data_generator import AudioGenerator
+# from data_generator import make_audio_gen
 
 import _pickle as pickle
+import tensorflow
 
-from keras import backend as K
-from keras.models import Model
-from keras.layers import (Input, Lambda)
-from keras.optimizers import SGD
-from keras.callbacks import ModelCheckpoint
+from tensorflow.keras import backend as K
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import (Input, Lambda)
+from tensorflow.keras.optimizers import SGD
+from tensorflow.keras.callbacks import ModelCheckpoint
 import os
 
 
@@ -39,7 +40,7 @@ def train(audio_gen,
           input_to_softmax,
           model_name,
           minibatch_size=20,
-          optimizer=SGD(learning_rate=0.02, decay=1e-6, momentum=0.9,
+          optimizer=SGD(learning_rate=0.001, decay=1e-6, momentum=0.9,
                         nesterov=True, clipnorm=5),
           epochs=20,
           verbose=1):
