@@ -2,6 +2,8 @@ import { Route, Routes } from "react-router-dom";
 //import { MainNavigation } from "./components/layout/MainNavigation";
 import { Prediction } from "./pages/Prediction";
 import { Spectogram } from "./pages/Spectogram";
+import { Home } from "./pages/Home";
+import { Aboutus } from "./pages/Aboutus";
 
 import { Layout } from "./components/layout/Layout";
 function App() {
@@ -9,8 +11,10 @@ function App() {
     <Layout className="">
     {/* // <MainNavigation> */}
     <Routes>
-      <Route path="/" element={<Prediction />} />
-      <Route path="/spectogram" element={<Spectogram />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/prediction" element={<Prediction />} />
+      <Route path="/visual" element={<Spectogram />} />
+      <Route path="/about-us" element={<Aboutus />} />
     </Routes>
     {/* </MainNavigation> */}
      </Layout>

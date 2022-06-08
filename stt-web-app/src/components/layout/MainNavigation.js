@@ -15,10 +15,16 @@ export const MainNavigation = () => {
         <nav className={classes.container}>
           <ul>
             <li>
-              <Link to="/">Prediction</Link>
+              <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/spectogram">Spectogram</Link>
+              <Link to="/prediction">Prediction</Link>
+            </li>
+            <li>
+              <Link to="/visual">Visualization</Link>
+            </li>
+            <li>
+              <Link to="/about-us">About Us</Link>
             </li>
           </ul>
         </nav>

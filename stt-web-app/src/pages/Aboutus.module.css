@@ -1,0 +1,10 @@
+.contain {
+    margin-left: -16rem;
+    margin-top: 13rem;
+}
+
+.contain p {
+    font-family: 'Tai Heritage Pro', serif;
+    text-align: justify;
+    font-size: 1.3rem;
+}

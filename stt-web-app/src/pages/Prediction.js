@@ -1,5 +1,5 @@
 import classesp from "./Prediction.module.css";
-import axios from "axios";
+//import axios from "axios";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 let gumStream = null;
@@ -59,11 +59,11 @@ export const Prediction = () => {
     data.append("text", "this is the transcription of the audio file");
     data.append("wavfile", blob, "recording.wav");
 
-    const config = {
-      headers: { "content-type": "multipart/form-data" },
-    };
+    // const config = {
+    //   headers: { "content-type": "multipart/form-data" },
+    // };
     console.log(data);
-    axios.post("http://localhost:8080/asr/", data, config);
+    // axios.post("http://localhost:8080/asr/", data, config);
   };
 
   const [file, setFile] = useState();
@@ -138,8 +138,7 @@ export const Prediction = () => {
               <div>
                 <h2>Upload Audio</h2>
                 <div>
-                  <form onSubmit={handleSubmit}>
-                    <h1>React File Upload</h1>
+                  <form onSubmit={handleSubmit}>                    
                     <input type="file" onChange={handleChange} />
                     <button type="submit">Upload</button>
                   </form>

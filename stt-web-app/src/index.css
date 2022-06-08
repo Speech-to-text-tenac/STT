@@ -7,7 +7,7 @@
 body {
   font-family: 'Open Sans', sans-serif;
   margin: 0;
-  background-color: black;
+  /* background-color: black; */
   /* background-image: url('../public/milad.jpg'); */
   /* background-repeat: no-repeat; */
   background-size: contain;
@@ -23,4 +23,8 @@ h2 {
   font-size: 2.8rem;
   color: tomato;
   margin-left: -3.6rem;
+}
+
+h3 {
+  font-size: 3rem;
 }
