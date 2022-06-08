@@ -4,7 +4,7 @@ Defines various functions for processing the data.
 import numpy as np
 import soundfile
 from numpy.lib.stride_tricks import as_strided
-from char_map import char_map, index_map
+from scripts.char_map import char_map, index_map
 
 
 def calc_feat_dim(window, max_freq):
@@ -135,7 +135,9 @@ def text_to_int_sequence(text):
             if c in char_map:
                 ch = char_map[c]
             else:
-                ch = char_map['<UNK>']
+                ch = char_map['<SPACE>']
+                pass
+                # ch = char_map['<UNK>']
             # ch = char_map[c]
         int_sequence.append(ch)
     return int_sequence
@@ -145,6 +147,6 @@ def int_sequence_to_text(int_sequence):
     """ Convert an integer sequence to text """
     text = []
     for c in int_sequence:
-        ch = index_map[c]
+        ch = index_map[c+1]
         text.append(ch)
     return text
