@@ -40,3 +40,4 @@ matplotlib
 IPython
 # torchaudio
 librosa
+soundfile
