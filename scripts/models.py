@@ -2,7 +2,7 @@ from tensorflow.keras import backend as K
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import (BatchNormalization, Conv1D, Dense, Input,
                           TimeDistributed, Activation, Bidirectional, SimpleRNN, GRU, LSTM)
-from keras.utils import plot_model
+from tensorflow.keras.utils import plot_model
 
 
 def cnn_output_length(input_length, filter_size, border_mode, stride,
