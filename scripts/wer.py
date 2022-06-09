@@ -42,8 +42,16 @@ def wer(r, h):
                 d[i][j] = d[i-1][j-1]
             else:
                 substitution = d[i-1][j-1] + 1
+<<<<<<< HEAD
+                insertion = d[i][j-1] + 1
+                deletion = d[i-1][j] + 1
+                d[i][j] = min(substitution, insertion, deletion)
+
+    return d[len(r)][len(h)]
+=======
                 insertion    = d[i][j-1] + 1
                 deletion     = d[i-1][j] + 1
                 d[i][j] = min(substitution, insertion, deletion)
 
     return d[len(r)][len(h)]
+>>>>>>> cf4c4d9d43dcf461d87e4ed2b4b72a29a39b781f

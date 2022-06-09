@@ -13,7 +13,7 @@ class TestResampling(unittest.TestCase):
         self.df = TestResampling(data[:5])
 
     def test_check_resampling(self):
-        sampled_audio, rates = resample(df, 'key')
+        sampled_audio, rates = resample(self.df, 'key')
         expected = [44100, 44100, 44100, 44100, 44100]
         self.assertEqual(rates[8:13], expected)
 

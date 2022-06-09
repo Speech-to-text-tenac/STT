@@ -5,16 +5,19 @@ import warnings
 
 import librosa  # for audio processing
 import matplotlib.pyplot as plt
+import scipy.io.wavfile as wav
 import numpy as np
 # import torch
 # import torchaudio
 from IPython.display import Audio, display
+from python_speech_features import mfcc
 from logger import Logger
 from pydub import AudioSegment
 from scipy.io import wavfile  # for audio processing
 # from torchaudio import transforms
 
 warnings.filterwarnings("ignore")
+RNG_SEED = 123
 
 
 class AudioUtil():
@@ -24,6 +27,7 @@ class AudioUtil():
             self.logger = Logger("preprocess_data.log").get_app_logger()
             self.logger.info(
                 'Successfully Instantiated DataLoader Class Object')
+            self.rng = random.Random(RNG_SEED)
         except Exception as e:
             self.logger.error(
                 'Failed to Instantiate LoadData Class Object')
@@ -60,6 +64,33 @@ class AudioUtil():
             self.logger.error(e)
             sys.exit(1)
 
+    def normalize_audio(self, signal):
+        """Audio normalization."""
+        feats_mean = np.mean(signal, axis=0)
+        feats_std = np.std(signal, axis=0)
+        signal = (signal - feats_mean) / (feats_std + 1e-14)
+        return signal
+
+    def mean_est(self, aud_len, audio_paths, k_samples=100):
+        """ Estimate the mean and std of the features from the training set
+        Params:
+            k_samples (int): Use this number of samples for estimation
+        """
+        k_samples = min(k_samples, aud_len)
+        samples = self.rng.sample(audio_paths, k_samples)
+        feats = [self.featurize(s) for s in samples]
+        feats = np.vstack(feats)
+        self.feats_mean = np.mean(feats, axis=0)
+        self.feats_std = np.std(feats, axis=0)
+
+    def featurize(self, audio_clip):
+        """ For a given audio clip, calculate the corresponding feature
+        Params:
+            audio_clip (str): Path to the audio clip
+        """
+        (rate, sig) = wav.read(audio_clip)
+        return mfcc(sig, rate, numcep=13)
+
     def resize_audio(self, audios: dict, max_duration: float) -> dict:
         """Extend duration of audio samples to max_duration.
 
@@ -84,6 +115,11 @@ class AudioUtil():
         # ----------------------------
         # Show a widget to play the audio sound
         # ----------------------------
+
+    def trim_audio(self, signal, trim_db=None):
+        """Trim the audio signal."""
+        signal, index = librosa.effects.trim(signal, top_db=trim_db)
+        return signal
 
     def play(self, aud):
         """Play the audio signal."""
@@ -122,6 +158,15 @@ class AudioUtil():
                 'Failed to resample audio')
             self.logger.error(e)
             sys.exit(1)
+
+    def split_audio(self, signal, clean_db=None):
+        """Split the audio signal into clean and noisy parts."""
+        yt = librosa.effects.split(signal, top_db=clean_db)
+        cleaned_signal = []
+        for start_i, end_i in yt:
+            cleaned_signal.append(signal[start_i: end_i])
+            signal = np.concatenate(np.array(cleaned_signal), axis=0)
+        return signal
 
     # ----------------------------
     # Pad (or trim) the signal to a fixed length 'max_ms' in milliseconds
