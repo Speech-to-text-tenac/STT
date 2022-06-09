@@ -1,0 +1,15 @@
+artifact_uri: file:///home/teddy/dev/learning/10%20academy/working/STT/notebooks/mlruns/0/3c7f6497da6f41b6b81714c449e2d999/artifacts
+end_time: 1654502669692
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+name: ''
+run_id: 3c7f6497da6f41b6b81714c449e2d999
+run_uuid: 3c7f6497da6f41b6b81714c449e2d999
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1654502669687
+status: 3
+tags: []
+user_id: teddy
