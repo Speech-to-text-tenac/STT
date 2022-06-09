@@ -8,11 +8,9 @@ export const MainNavigation = () => {
       <div className={classes.nav_contain}>
         <header className={classes.header}>
           <div className={classes.logo}>
-            <h1>African language Speech Recognition - Speech-to-Text</h1>
+            <h4>African language Speech Recognition - Speech-to-Text</h4>
           </div>
-        </header>
-
-        <nav className={classes.container}>
+          <nav className={classes.container}>
           <ul>
             <li>
               <Link to="/">Home</Link>
@@ -28,6 +26,9 @@ export const MainNavigation = () => {
             </li>
           </ul>
         </nav>
+        </header>
+
+       
       </div>
     </>
   );
