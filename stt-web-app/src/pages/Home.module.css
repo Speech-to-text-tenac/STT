@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Slab:ital@0;1&family=Tai+Heritage+Pro&display=swap');
-
+body{
+    background-color: #e6f2ff;
+}
 .content {
     margin-left: -20rem;
     max-width: 120%;
@@ -15,7 +17,9 @@
 .para2 {
     margin-left: 16rem;
     width: 100%;
-    margin-top: 7rem
+    margin-top: 4rem;
+    font-family: 'Open Sans', sans-serif;
+
 }
 
 
@@ -54,5 +58,10 @@
     background-color: rgb(207, 207, 7);
     padding: 2rem;
     width: 60%;
+}
+.videobackground{
+    width:70%;
+    height:70%;
+    margin-left: 20rem;
 }
 
