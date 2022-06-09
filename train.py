@@ -56,7 +56,7 @@ if __name__ == '__main__':
 
 
     EPOCHS = 5
-    MODEL_NAME = "rnn1"
+    MODEL_NAME = "rnn2"
     params = {'input_dim':13,
                     'filters':200,
                     'kernel_size':11, 
@@ -77,7 +77,7 @@ if __name__ == '__main__':
                     output_dim=len(char_map)+1)
 
     train(audio_gen, input_to_softmax=model, model_name=MODEL_NAME, epochs=EPOCHS, minibatch_size=MINI_BATCH_SIZE)
-    plot_hist('models/rnn1.pickle')
+    plot_hist('rnn2')
     # with open("metrics.txt", 'w') as outfile:
     #         outfile.write("model losses: %2.1f%%\n" % hist.losses[EPOCHS-1])
     # mlflow.log_param('model_parameters', params)
