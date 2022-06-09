@@ -1,5 +1,5 @@
 import classesp from "./Prediction.module.css";
-//import axios from "axios";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 let gumStream = null;
@@ -74,19 +74,24 @@ export const Prediction = () => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    //const url = "http://localhost:3000/uploadFile";
+    const url = "https://stt-amharic.herokuapp.com/predict";
     const formData = new FormData();
     formData.append("file", file);
     formData.append("fileName", file.name);
     console.log(file.name);
-    // const config = {
-    //   headers: {
-    //     "content-type": "multipart/form-data",
-    //   },
-    // };
-    // axios.post(url, formData, config).then((response) => {
-    //   console.log(response.data);
-    // });
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    };
+    
+    axios.post(url, formData, config).then((response) => {
+      console.log("here")
+      console.log(response);
+      console.log(response.data.message)
+    }).catch((err)=>{
+      console.log(err,"error here")
+    });
   }
 
   return (
