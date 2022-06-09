@@ -31,9 +31,9 @@ jobs:
     - name: Write CML report
       env:
         REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
+      # run: |
         # Post reports as comments in GitHub PRs
         # python train.py
-        echo '# model loss' > report.md
-        cat metrics.txt >> report.md
-        cml-send-comment report.md
+        # echo '# model loss' > report.md
+        # cat metrics.txt >> report.md
+        # cml-send-comment report.md
