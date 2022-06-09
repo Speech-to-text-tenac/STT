@@ -6,12 +6,21 @@ This project demonstartes how to build speech-to-text deep learning model that p
 
 ## Content
 
-- [Introduction](#introduction)
-- [Objective](#objective)
-- [Data & Features](#data-&-features)
-- [Project Structure](#project-structure)
-- [contributors](#contributors)
-- [Install](#install)
+- [African language Speech Recognition - Speech-to-Text](#african-language-speech-recognition---speech-to-text)
+  - [Content](#content)
+  - [Introduction](#introduction)
+  - [Objective](#objective)
+  - [Data & Features](#data--features)
+  - [Usage](#usage)
+    - [Docker-compose](#docker-compose)
+  - [Project Structure](#project-structure)
+    - [.dvc](#dvc)
+    - [Images](#images)
+    - [data](#data)
+    - [notebooks](#notebooks)
+    - [scripts](#scripts)
+    - [root directory](#root-directory)
+  - [contributors](#contributors)
 
 ## Introduction
 
@@ -31,6 +40,24 @@ Dataset for:
 
 Input features (X): audio clips of spoken words  
 Target labels (y): a text transcript of what was spoken
+
+## Usage
+### Docker-compose
+Both the front-end and the back-end could be run on a docker container.
+<br>
+
+**1. Clone the repo**
+```
+git clone https://github.com/Speech-to-text-tenac/STT
+```
+**2. cd into repo**
+```
+cd STT
+```
+**3.Start docker container:**
+```
+docker-compose up -d
+```
 
 ## Project Structure
 
@@ -67,7 +94,6 @@ directory for scripts files.
 
 ![Contributors list](https://contrib.rocks/image?repo=Speech-to-text-tenac/STT)
 
-## Install
 
 ```
 clone https://github.com/Speech-to-text-tenac/STT

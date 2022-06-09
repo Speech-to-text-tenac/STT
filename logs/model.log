@@ -1,0 +1,232 @@
+06-05-2022 01:50:55 : INFO : logger : Successfully Instantiated STTModel Class Object
+06-05-2022 12:19:39 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 12:24:47 : INFO : logger : Successfully Instantiated DataLoader Class Object
+06-05-2022 12:24:48 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 12:24:48 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 12:24:54 : INFO : logger : Successfully Instantiated DataLoader Class Object
+06-05-2022 12:24:54 : INFO : logger : Successfully Instantiated DataLoader Class Object
+06-05-2022 12:24:56 : INFO : logger : Successfully Instantiated DataLoader Class Object
+06-05-2022 12:24:56 : INFO : logger : Successfully Instantiated DataLoader Class Object
+06-05-2022 12:24:57 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 12:24:57 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 12:24:57 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 12:29:31 : INFO : logger : Successfully Instantiated DataLoader Class Object
+06-05-2022 12:29:31 : INFO : logger : Successfully Instantiated DataLoader Class Object
+06-05-2022 12:29:31 : INFO : logger : Successfully Instantiated DataLoader Class Object
+06-05-2022 12:29:32 : INFO : logger : Successfully Instantiated DataLoader Class Object
+06-05-2022 12:29:32 : INFO : logger : Successfully Instantiated DataLoader Class Object
+06-05-2022 12:29:32 : INFO : logger : Successfully Instantiated DataLoader Class Object
+06-05-2022 12:29:33 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 12:29:33 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 12:29:33 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 12:29:33 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 13:13:25 : INFO : logger : Successfully Instantiated DataLoader Class Object
+06-05-2022 13:13:25 : INFO : logger : Successfully Instantiated DataLoader Class Object
+06-05-2022 13:13:25 : INFO : logger : Successfully Instantiated DataLoader Class Object
+06-05-2022 13:13:25 : INFO : logger : Successfully Instantiated DataLoader Class Object
+06-05-2022 13:13:25 : ERROR : logger : Failed to Instantiate LoadData Class Object
+06-05-2022 13:13:25 : ERROR : logger : Failed to Instantiate LoadData Class Object
+06-05-2022 13:13:25 : ERROR : logger : Failed to Instantiate LoadData Class Object
+06-05-2022 13:13:25 : ERROR : logger : Failed to Instantiate LoadData Class Object
+06-05-2022 13:13:25 : ERROR : logger : 'DataLoader' object has no attribute 'feat_dim'
+06-05-2022 13:13:25 : ERROR : logger : 'DataLoader' object has no attribute 'feat_dim'
+06-05-2022 13:13:25 : ERROR : logger : 'DataLoader' object has no attribute 'feat_dim'
+06-05-2022 13:13:25 : ERROR : logger : 'DataLoader' object has no attribute 'feat_dim'
+06-05-2022 13:16:41 : INFO : logger : Successfully Instantiated DataLoader Class Object
+06-05-2022 13:16:41 : INFO : logger : Successfully Instantiated DataLoader Class Object
+06-05-2022 13:16:41 : INFO : logger : Successfully Instantiated DataLoader Class Object
+06-05-2022 13:16:41 : INFO : logger : Successfully Instantiated DataLoader Class Object
+06-05-2022 13:16:43 : INFO : logger : Successfully Instantiated DataLoader Class Object
+06-05-2022 13:16:43 : INFO : logger : Successfully Instantiated DataLoader Class Object
+06-05-2022 13:16:43 : INFO : logger : Successfully Instantiated DataLoader Class Object
+06-05-2022 13:16:43 : INFO : logger : Successfully Instantiated DataLoader Class Object
+06-05-2022 13:16:44 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 13:16:44 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 13:16:44 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 13:16:44 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 13:16:44 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 13:19:15 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 13:19:15 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 13:19:15 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 13:19:15 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 13:19:15 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 13:19:15 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 13:20:18 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 13:20:18 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 13:20:18 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 13:20:18 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 13:20:18 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 13:20:18 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 13:20:18 : INFO : logger :  Instantiated STTModel Class Object
+06-05-2022 13:20:59 : ERROR : logger : Failed to load transcription data
+06-05-2022 13:20:59 : ERROR : logger : Failed to load transcription data
+06-05-2022 13:20:59 : ERROR : logger : Failed to load transcription data
+06-05-2022 13:20:59 : ERROR : logger : Failed to load transcription data
+06-05-2022 13:20:59 : ERROR : logger : Failed to load transcription data
+06-05-2022 13:20:59 : ERROR : logger : Failed to load transcription data
+06-05-2022 13:20:59 : ERROR : logger : Failed to load transcription data
+06-05-2022 13:20:59 : ERROR : logger : [Errno 2] No such file or directory: '../data/data/train/wavtext'
+06-05-2022 13:20:59 : ERROR : logger : [Errno 2] No such file or directory: '../data/data/train/wavtext'
+06-05-2022 13:20:59 : ERROR : logger : [Errno 2] No such file or directory: '../data/data/train/wavtext'
+06-05-2022 13:20:59 : ERROR : logger : [Errno 2] No such file or directory: '../data/data/train/wavtext'
+06-05-2022 13:20:59 : ERROR : logger : [Errno 2] No such file or directory: '../data/data/train/wavtext'
+06-05-2022 13:20:59 : ERROR : logger : [Errno 2] No such file or directory: '../data/data/train/wavtext'
+06-05-2022 13:20:59 : ERROR : logger : [Errno 2] No such file or directory: '../data/data/train/wavtext'
+06-05-2022 13:24:07 : ERROR : logger : Failed to load transcription data
+06-05-2022 13:24:07 : ERROR : logger : Failed to load transcription data
+06-05-2022 13:24:07 : ERROR : logger : Failed to load transcription data
+06-05-2022 13:24:07 : ERROR : logger : Failed to load transcription data
+06-05-2022 13:24:07 : ERROR : logger : Failed to load transcription data
+06-05-2022 13:24:07 : ERROR : logger : Failed to load transcription data
+06-05-2022 13:24:07 : ERROR : logger : Failed to load transcription data
+06-05-2022 13:24:07 : ERROR : logger : [Errno 2] No such file or directory: '../data/data/train/wav/text'
+06-05-2022 13:24:07 : ERROR : logger : [Errno 2] No such file or directory: '../data/data/train/wav/text'
+06-05-2022 13:24:07 : ERROR : logger : [Errno 2] No such file or directory: '../data/data/train/wav/text'
+06-05-2022 13:24:07 : ERROR : logger : [Errno 2] No such file or directory: '../data/data/train/wav/text'
+06-05-2022 13:24:07 : ERROR : logger : [Errno 2] No such file or directory: '../data/data/train/wav/text'
+06-05-2022 13:24:07 : ERROR : logger : [Errno 2] No such file or directory: '../data/data/train/wav/text'
+06-05-2022 13:24:07 : ERROR : logger : [Errno 2] No such file or directory: '../data/data/train/wav/text'
+06-05-2022 13:26:17 : ERROR : logger : Failed to load transcription data
+06-05-2022 13:26:17 : ERROR : logger : Failed to load transcription data
+06-05-2022 13:26:17 : ERROR : logger : Failed to load transcription data
+06-05-2022 13:26:17 : ERROR : logger : Failed to load transcription data
+06-05-2022 13:26:17 : ERROR : logger : Failed to load transcription data
+06-05-2022 13:26:17 : ERROR : logger : Failed to load transcription data
+06-05-2022 13:26:17 : ERROR : logger : Failed to load transcription data
+06-05-2022 13:26:17 : ERROR : logger : [Errno 2] No such file or directory: '../data/data/train/wav/text'
+06-05-2022 13:26:17 : ERROR : logger : [Errno 2] No such file or directory: '../data/data/train/wav/text'
+06-05-2022 13:26:17 : ERROR : logger : [Errno 2] No such file or directory: '../data/data/train/wav/text'
+06-05-2022 13:26:17 : ERROR : logger : [Errno 2] No such file or directory: '../data/data/train/wav/text'
+06-05-2022 13:26:17 : ERROR : logger : [Errno 2] No such file or directory: '../data/data/train/wav/text'
+06-05-2022 13:26:17 : ERROR : logger : [Errno 2] No such file or directory: '../data/data/train/wav/text'
+06-05-2022 13:26:17 : ERROR : logger : [Errno 2] No such file or directory: '../data/data/train/wav/text'
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Successfully got wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
+06-05-2022 13:27:29 : INFO : logger : Getting wav files
