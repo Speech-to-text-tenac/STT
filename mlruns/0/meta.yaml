@@ -1,0 +1,4 @@
+artifact_location: file:///mnt/10ac-batch-5/notebooks/yididya/STT/mlruns/0
+experiment_id: '0'
+lifecycle_stage: active
+name: Default
