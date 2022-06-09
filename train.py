@@ -73,6 +73,8 @@ if __name__ == '__main__':
                     output_dim=len(char_map)+1)
 
     train(audio_gen, input_to_softmax=model, model_name=MODEL_NAME, epochs=EPOCHS, minibatch_size=MINI_BATCH_SIZE)
+    # with open("metrics.txt", 'w') as outfile:
+    #         outfile.write("model losses: %2.1f%%\n" % hist.losses[EPOCHS-1])
     mlflow.log_param('model_parameters', params)
 
     mlflow.log_param('input_shape', 13)

@@ -35,14 +35,14 @@ def add_ctc_loss(input_to_softmax):
         outputs=loss_out)
     return model
 
-
+EPOCHS = 20
 def train(audio_gen,
           input_to_softmax,
           model_name,
           minibatch_size=20,
           optimizer=SGD(learning_rate=0.001, decay=1e-6, momentum=0.9,
                         nesterov=True, clipnorm=5),
-          epochs=20,
+          epochs=EPOCHS,
           verbose=1):
     # calculate steps_per_epoch
     num_train_examples = len(audio_gen.train_audio_paths)
@@ -70,7 +70,12 @@ def train(audio_gen,
     hist = model.fit_generator(generator=audio_gen.next_train(), steps_per_epoch=steps_per_epoch,
                                callbacks=[checkpointer],
                                epochs=epochs, validation_data=audio_gen.next_valid(), validation_steps=validation_steps, verbose=verbose, use_multiprocessing=True)
+    
+    
+
 
     # save model loss
     with open('models/'+model_name+'.pickle', 'wb') as f:
         pickle.dump(hist.history, f)
+
+    # return hist
