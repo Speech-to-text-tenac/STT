@@ -1,15 +1,14 @@
 import classesp from "./Prediction.module.css";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import React, { useState } from "react";
-let gumStream = null;
-let recorder = null;
-let audioContext = null;
+// let gumStream = null;
+// let recorder = null;
+// let audioContext = null;
 // const audio;
 
 export const Prediction = () => {
-  const [show, setShow] = useState(false);
-  const [view, setView] = useState(true);
+  // const [show, setShow] = useState(false);
+  // const [view, setView] = useState(true);
   const [userData, setUserData] = useState({});
   // const startRecording = () => {
   //   let constraints = {
