@@ -5,10 +5,12 @@ import React, { useState } from "react";
 let gumStream = null;
 let recorder = null;
 let audioContext = null;
+// const audio;
 
 export const Prediction = () => {
   const [show, setShow] = useState(false);
   const [view, setView] = useState(true);
+  const [userData, setUserData] = useState({});
   const startRecording = () => {
     let constraints = {
       audio: true,
@@ -86,9 +88,14 @@ export const Prediction = () => {
     };
     
     axios.post(url, formData, config).then((response) => {
-      console.log("here")
+      console.log("here");
       console.log(response);
-      console.log(response.data.message)
+      console.log(response.data.message);
+      setUserData(response.data);
+      // let audio = response.data.message;
+      // this.setState({audioMessage:audio})
+      // console.log(audioMessage)
+
     }).catch((err)=>{
       console.log(err,"error here")
     });
@@ -136,6 +143,7 @@ export const Prediction = () => {
               </div>
               <section>
                 <p>HELLO, EVERYONE</p>
+                {/* <p>{audios}</p> */}
               </section>
             </div>
           ) : (
@@ -150,7 +158,8 @@ export const Prediction = () => {
                 </div>
               </div>
               <section>
-                <p>HELLO, EVERYONE</p>
+                <p>ትንበያዉ </p>
+                <p>{userData.message}</p>
               </section>
             </div>
           )}
