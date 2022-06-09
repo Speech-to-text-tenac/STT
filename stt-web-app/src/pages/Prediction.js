@@ -142,8 +142,8 @@ export const Prediction = () => {
                 <audio autoPlay controls></audio>
               </div>
               <section>
-                <p>HELLO, EVERYONE</p>
-                {/* <p>{audios}</p> */}
+                <p>{userData.message}</p>
+
               </section>
             </div>
           ) : (
