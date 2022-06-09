@@ -12,7 +12,7 @@ import scipy.io.wavfile as wav
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
-from scripts.utils import calc_feat_dim, spectrogram_from_file, text_to_int_sequence
+from scripts.utils import calc_feat_dim, text_to_int_sequence
 from scripts.utils import conv_output_length
 
 RNG_SEED = 123
@@ -253,13 +253,10 @@ class AudioGenerator():
         Params:
             audio_clip (str): Path to the audio clip
         """
-        if self.spectrogram:
-            return spectrogram_from_file(
-                audio_clip, step=self.step, window=self.window,
-                max_freq=self.max_freq)
-        else:
-            (rate, sig) = wav.read(audio_clip)
-            return mfcc(sig, rate, numcep=self.mfcc_dim)
+        
+        
+        (rate, sig) = wav.read(audio_clip)
+        return mfcc(sig, rate, numcep=self.mfcc_dim)
 
     def normalize(self, feature, eps=1e-14):
         """ Center a feature using the mean and std
