@@ -1,17 +1,21 @@
 import sys
 import os
 import tensorflow as tf
-import mlflow
+# import mlflow
 sys.path.insert(0, os.path.abspath(os.path.join(
     os.path.dirname(__file__), '../scripts')))
 # sys.path.append(os.path.abspath(os.path.join('../scripts')))
 
-print(os.getcwd())
+
 
 from scripts.data_generator import make_audio_gen
 from scripts.train import train
 from scripts.models import model_2
 from scripts.char_map import char_map, index_map
+from plot import plot_hist
+
+# model_name = "rnn"
+# plot_hist(model_name)
 
 
 gpus = tf.config.list_physical_devices('GPU')
@@ -29,13 +33,13 @@ if gpus:
 
 if __name__ == '__main__':
 
-    TRAIN_CORPUS = "./notebooks/train3.json"
-    VALID_CORPUS = "./notebooks/train3.json"
+    TRAIN_CORPUS = "./notebooks/valid2_corpus.json"
+    VALID_CORPUS = "./notebooks/valid2_corpus.json"
     # VALID_CORPUS = "data_stbbl/valid_corpus.json"
 
     MFCC_DIM = 13
     SPECTOGRAM = False
-    MODEL_NAME = "model_2_stbbl"
+    MODEL_NAME = "rnn1"
 
     ################ Reminder MINI_BATCH_SIZE=250 in previous notebooks
     MINI_BATCH_SIZE = 7
@@ -52,7 +56,7 @@ if __name__ == '__main__':
 
 
     EPOCHS = 5
-    MODEL_NAME = "model_2_stbbli"
+    MODEL_NAME = "rnn1"
     params = {'input_dim':13,
                     'filters':200,
                     'kernel_size':11, 
@@ -73,12 +77,13 @@ if __name__ == '__main__':
                     output_dim=len(char_map)+1)
 
     train(audio_gen, input_to_softmax=model, model_name=MODEL_NAME, epochs=EPOCHS, minibatch_size=MINI_BATCH_SIZE)
+    plot_hist('models/rnn1.pickle')
     # with open("metrics.txt", 'w') as outfile:
     #         outfile.write("model losses: %2.1f%%\n" % hist.losses[EPOCHS-1])
-    mlflow.log_param('model_parameters', params)
+    # mlflow.log_param('model_parameters', params)
 
-    mlflow.log_param('input_shape', 13)
-    mlflow.log_param('input_rows', 13)
-    mlflow.log_param('mini batch size', MINI_BATCH_SIZE)
+    # mlflow.log_param('input_shape', 13)
+    # mlflow.log_param('input_rows', 13)
+    # mlflow.log_param('mini batch size', MINI_BATCH_SIZE)
 
-    mlflow.sklearn.save_model(model, "model")
+    # mlflow.sklearn.save_model(model, "model")
