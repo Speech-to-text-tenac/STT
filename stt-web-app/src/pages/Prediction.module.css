@@ -52,6 +52,7 @@
 }
 .upload {
   margin-top: -3rem;
+
 }
 .display main {
    margin-left: -31rem;
@@ -72,6 +73,7 @@
 .display button:hover {
   transform: translateY(2px);
   transition: 0.5s;
+  
 }
 
 .display audio {
@@ -91,39 +93,48 @@
 
 .upload div {
   margin-top: 5rem;
+  text-align: center;
+  margin-left: 5rem;
 }
 
 .upload button {
   border: none;
   padding: 1rem;
-  margin-right: 10px;
+  margin-top: 2rem;
   cursor: pointer;
   width: 7rem;
-  background-color: tomato;
+  background-color: #000d1a;
   font-size: 1.3rem;
   color: white;
   border-radius: 3px;
 }
 
 .upload input[type="file"] {
-  color: yellow;
+  color: rgba(0, 0, 0, 0.476);
 }
 
 .upload button:hover {
   transform: translateY(-2px);
   transition: 0.5s;
   filter: brightness(110%);
+  background-color: #4da0ff;
+  color: #000d1a;
+  border-color: #000d1a;
+
 }
 
 .upload section {
-  background-color: rgba(255, 255, 0, 0.9);
+  background-color: #80bbff;
   font-family: "Cinzel", serif;
   margin-top: 4rem;
-  margin-left: -17rem;
+  /* margin-left: 17rem; */
   max-width: 140%;
   padding: 3rem;
+
+
 }
 
 .upload div {
   margin-right: 5rem ;
 }
+

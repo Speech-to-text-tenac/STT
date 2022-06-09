@@ -1,6 +1,6 @@
 .nav_contain
 .header {
-  width: 100%;
+  width: 110%;
   background-color:#ccebff;
   
   height: 7rem;
@@ -8,6 +8,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 10%;
+  column-gap: 15rem;
 }
 
 .logo {
@@ -15,8 +16,10 @@
   font-size: 2rem;
   /* color: rgb(236, 9, 9); */
   font-weight: bold;
-  margin-left: -5rem;
+  /* margin-left: -5rem; */
   margin-top: 2rem;
+  /* width: 100rem; */
+  /* flex-basis: auto; */
 }
 
 .container ul {
@@ -37,8 +40,9 @@
 .container li {
   border: rgb(199, 199, 199);
   border-radius: 0;
-  width: 99%;
+  /* width: 60%; */
   padding: 0;
+  margin-right: 2rem;
   margin-bottom: 10px;
   /* background-color:  #89ABE3FF; */
 }
@@ -61,4 +65,8 @@
 .container  a.active {
   filter: brightness(180%);
 }
-
+.a{
+  text-align: center;
+  margin-left: 13rem;
+  
+}

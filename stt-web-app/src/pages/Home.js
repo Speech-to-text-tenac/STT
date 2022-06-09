@@ -3,7 +3,8 @@ import classes from "./Home.module.css";
 export const Home = () => {
   return (
  
-    <div className={classes.content}>
+    <div className={classes.contain}>
+      <h2 className={classes.a}> Speech to text</h2>
       <p className={classes.para2}>
         Speech recognition technology allows for hands-free control of
         smartphones, speakers, and even vehicles in a wide variety of languages.{" "}

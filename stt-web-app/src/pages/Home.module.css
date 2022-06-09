@@ -2,11 +2,10 @@
 body{
     background-color: #e6f2ff;
 }
-.content {
-    margin-left: -20rem;
-    max-width: 120%;
+.contain {
+    margin-left: -16rem;
+    margin-top: 5rem;
 }
-
 .content p {
     margin-bottom: 5rem;
     font-family: 'Tai Heritage Pro', serif;
@@ -18,7 +17,7 @@ body{
     margin-left: 16rem;
     width: 100%;
     margin-top: 4rem;
-    font-family: 'Open Sans', sans-serif;
+    
 
 }
 
@@ -63,5 +62,10 @@ body{
     width:70%;
     height:70%;
     margin-left: 20rem;
+}
+.a{
+    text-align: center;
+    margin-left: 13rem;
+    
 }
 

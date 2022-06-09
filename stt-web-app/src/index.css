@@ -11,6 +11,7 @@ body {
   /* background-image: url('../public/milad.jpg'); */
   /* background-repeat: no-repeat; */
   background-size: contain;
+  overflow-x: hidden;
 }
 
 h1 {
@@ -21,7 +22,7 @@ h1 {
 
 h2 {
   font-size: 2.8rem;
-  color: tomato;
+  color: #000d1a;
   margin-left: -3.6rem;
 }
 

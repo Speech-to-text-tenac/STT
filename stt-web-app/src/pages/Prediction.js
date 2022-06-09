@@ -11,62 +11,62 @@ export const Prediction = () => {
   const [show, setShow] = useState(false);
   const [view, setView] = useState(true);
   const [userData, setUserData] = useState({});
-  const startRecording = () => {
-    let constraints = {
-      audio: true,
-      video: false,
-    };
+  // const startRecording = () => {
+  //   let constraints = {
+  //     audio: true,
+  //     video: false,
+  //   };
 
-    audioContext = new window.AudioContext();
-    console.log("sample rate: " + audioContext.sampleRate);
+  //   audioContext = new window.AudioContext();
+  //   console.log("sample rate: " + audioContext.sampleRate);
 
-    navigator.mediaDevices
-      .getUserMedia(constraints)
-      .then(function (stream) {
-        console.log("initializing Recorder.js ...");
+  //   navigator.mediaDevices
+  //     .getUserMedia(constraints)
+  //     .then(function (stream) {
+  //       console.log("initializing Recorder.js ...");
 
-        gumStream = stream;
+  //       gumStream = stream;
 
-        let input = audioContext.createMediaStreamSource(stream);
-        console.log(input);
+  //       let input = audioContext.createMediaStreamSource(stream);
+  //       console.log(input);
 
-        recorder = new window.Recorder(input, {
-          numChannels: 1,
-        });
+  //       recorder = new window.Recorder(input, {
+  //         numChannels: 1,
+  //       });
 
-        console.log(recorder);
-        recorder.record();
-        console.log("Recording started");
-      })
-      .catch(function (err) {
-        //enable the record button if getUserMedia() fails
-        console.log(err);
-      });
-  };
+  //       console.log(recorder);
+  //       recorder.record();
+  //       console.log("Recording started");
+  //     })
+  //     .catch(function (err) {
+  //       //enable the record button if getUserMedia() fails
+  //       console.log(err);
+  //     });
+  // };
 
-  const stopRecording = () => {
-    console.log("stopButton clicked");
+  // const stopRecording = () => {
+  //   console.log("stopButton clicked");
 
-    recorder.stop(); //stop microphone access
-    gumStream.getAudioTracks()[0].stop();
+  //   recorder.stop(); //stop microphone access
+  //   gumStream.getAudioTracks()[0].stop();
 
-    recorder.exportWAV(onStop);
-  };
+  //   recorder.exportWAV(onStop);
+  // };
 
-  const onStop = (blob) => {
-    console.log("uploading...");
+  // const onStop = (blob) => {
+  //   console.log("uploading...");
 
-    let data = new FormData();
+  //   let data = new FormData();
 
-    data.append("text", "this is the transcription of the audio file");
-    data.append("wavfile", blob, "recording.wav");
+  //   data.append("text", "this is the transcription of the audio file");
+  //   data.append("wavfile", blob, "recording.wav");
 
-    // const config = {
-    //   headers: { "content-type": "multipart/form-data" },
-    // };
-    console.log(data);
-    // axios.post("http://localhost:8080/asr/", data, config);
-  };
+  //   // const config = {
+  //   //   headers: { "content-type": "multipart/form-data" },
+  //   // };
+  //   console.log(data);
+  //   // axios.post("http://localhost:8080/asr/", data, config);
+  // };
 
   const [file, setFile] = useState();
 
@@ -104,10 +104,10 @@ export const Prediction = () => {
   return (
     <>
       <div className={classesp.container}>
-        <div className={classesp.link}>
+        {/* <div className={classesp.link}>
           <span title="choose" onClick={() => setShow(!show)}></span>
-          {/* <br></br>
-        <span></span> */}
+          <br></br>
+        <span></span>
           {show ? (
             <ul>
               <li>
@@ -123,8 +123,24 @@ export const Prediction = () => {
               </li>
             </ul>
           ) : null}
-        </div>
-        <div>
+        </div> */}
+         <div className={classesp.upload}>
+              <div>
+                <h2>Upload Audio</h2>
+                <div>
+                  <form onSubmit={handleSubmit}>                    
+                    <input type="file" onChange={handleChange} />
+                    <button type="submit">Upload</button>
+                  </form>
+                </div>
+              </div>
+              <section>
+                <p>{userData.message}</p>
+              </section>
+            </div>
+
+
+        {/* <div>
           {view ? (
             <div className={classesp.display}>
               <div>
@@ -163,7 +179,7 @@ export const Prediction = () => {
               </section>
             </div>
           )}
-        </div>
+        </div> */}
       </div>
     </>
   );
