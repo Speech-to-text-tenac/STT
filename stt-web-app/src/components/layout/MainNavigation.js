@@ -8,7 +8,7 @@ export const MainNavigation = () => {
       <div className={classes.nav_contain}>
         <header className={classes.header}>
           <div className={classes.logo}>
-            <h4>African language Speech Recognition - Speech-to-Text</h4>
+            <h4>Speech Recognition</h4>
           </div>
           <nav className={classes.container}>
           <ul>
