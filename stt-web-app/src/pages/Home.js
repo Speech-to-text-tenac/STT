@@ -10,8 +10,8 @@ export const Home = () => {
         Speech recognition technology allows for hands-free control of
         smartphones, speakers, and even vehicles in a wide variety of languages.{" "}
       </p>
-      <video className={classes.videobackground} loop muted autoplay>
-        <source src={process.env.PUBLIC_URL + "/img/AudioWave.mp4"}></source>
+      <video className={classes.videobackground} loop muted autoPlay>
+        <source src={process.env.PUBLIC_URL + "/img/AudioWave.mp4"} type="video/mp4"></source>
       </video>
       <p className={classes.para2}>
 
