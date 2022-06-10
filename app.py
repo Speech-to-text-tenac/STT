@@ -10,7 +10,7 @@ from flask_cors import CORS
 from werkzeug.utils import secure_filename
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), './scripts')))
-from prediction import Prediction
+from prediction2 import Prediction
 
 # Instantiate prediction class
 prediction = Prediction()
