@@ -1,0 +1,140 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.link {
+  display: flex;
+  margin-left: -20rem;
+}
+
+.link span {
+  height: 30px;
+  width: 30px;
+  background-color: yellow;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.link span:hover {
+    filter: brightness(100%);
+    background-color: rgb(235, 235, 9);
+}
+
+.link ul {
+  list-style-type: none;
+  background-color: tomato;
+  padding: 1rem;
+  height: 6.3rem;
+}
+
+.link li {
+  margin-bottom: 14px;
+}
+
+.link a {
+  text-decoration: none;
+  color: white;
+}
+
+.link a:hover{
+    color: #000;
+    transition: 0.5s;
+}
+
+.link ul:hover {
+  filter: brightness(110%);
+  transition: 0.5s;
+}
+
+.display {
+ margin-top: -2rem;
+}
+.upload {
+  margin-top: -3rem;
+
+}
+.display main {
+   margin-left: -31rem;
+}
+
+.display button {
+  border: none;
+  padding: 1rem;
+  margin-right: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 5rem;
+  background-color: tomato;
+  font-size: 1.3rem;
+  color: white;
+}
+
+.display button:hover {
+  transform: translateY(2px);
+  transition: 0.5s;
+  
+}
+
+.display audio {
+  margin-left: -35rem;
+  background-color: tomato;
+}
+
+.display section {
+  background-color: rgba(255, 255, 0, 0.9);
+  font-family: "Cinzel", serif;
+  margin-top: 4rem;
+  margin-left: -47rem;
+  margin-right: 3rem;
+  /* max-width: 100rem; */
+  padding: 3rem;
+}
+
+.upload div {
+  margin-top: 5rem;
+  text-align: center;
+  margin-left: 5rem;
+}
+
+.upload button {
+  border: none;
+  padding: 1rem;
+  margin-top: 2rem;
+  cursor: pointer;
+  width: 7rem;
+  background-color: #000d1a;
+  font-size: 1.3rem;
+  color: white;
+  border-radius: 3px;
+}
+
+.upload input[type="file"] {
+  color: rgba(0, 0, 0, 0.476);
+}
+
+.upload button:hover {
+  transform: translateY(-2px);
+  transition: 0.5s;
+  filter: brightness(110%);
+  background-color: #4da0ff;
+  color: #000d1a;
+  border-color: #000d1a;
+
+}
+
+.upload section {
+  background-color: #80bbff;
+  font-family: "Cinzel", serif;
+  margin-top: 4rem;
+  /* margin-left: 17rem; */
+  max-width: 140%;
+  padding: 3rem;
+
+
+}
+
+.upload div {
+  margin-right: 5rem ;
+}
+

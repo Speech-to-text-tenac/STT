@@ -1,0 +1,38 @@
+.display {
+ margin-top: -2rem;
+}
+.display main {
+   margin-left: -31rem;
+}
+
+.display button {
+  border: none;
+  padding: 1rem;
+  margin-right: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 5rem;
+  background-color: tomato;
+  font-size: 1.3rem;
+  color: white;
+}
+
+.display button:hover {
+  transform: translateY(2px);
+  transition: 0.5s;
+}
+
+.display audio {
+  margin-left: -5rem;
+  background-color: tomato;
+}
+
+.display section {
+  background-color: rgba(255, 255, 0, 0.9);
+  font-family: "Cinzel", serif;
+  margin-top: 4rem;
+  margin-left: -17rem;
+  margin-right: 3rem;
+  max-width: 120%;
+  padding: 3rem;
+}
