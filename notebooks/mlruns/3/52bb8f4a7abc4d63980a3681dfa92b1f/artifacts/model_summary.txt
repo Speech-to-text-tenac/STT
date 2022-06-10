@@ -1,0 +1,34 @@
+Model: "model_3"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ the_input (InputLayer)         [(None, None)]       0           []                               
+                                                                                                  
+ preprocessing_model (Functiona  (None, None, 128, 1  512        ['the_input[0][0]']              
+ l)                             )                                                                 
+                                                                                                  
+ tf.compat.v1.squeeze_2 (TFOpLa  (None, None, 128)   0           ['preprocessing_model[2][0]']    
+ mbda)                                                                                            
+                                                                                                  
+ cnn (Functional)               (None, None, 1024)   249216      ['tf.compat.v1.squeeze_2[0][0]'] 
+                                                                                                  
+ input_length (InputLayer)      [(None, 1)]          0           []                               
+                                                                                                  
+ BidirectionalRNN (Functional)  (None, None, 222)    16280222    ['cnn[0][0]']                    
+                                                                                                  
+ the_labels (InputLayer)        [(None, None)]       0           []                               
+                                                                                                  
+ lambda_2 (Lambda)              (None, 1)            0           ['input_length[0][0]']           
+                                                                                                  
+ label_length (InputLayer)      [(None, 1)]          0           []                               
+                                                                                                  
+ ctc (Lambda)                   (None, 1)            0           ['BidirectionalRNN[0][0]',       
+                                                                  'the_labels[0][0]',             
+                                                                  'lambda_2[0][0]',               
+                                                                  'label_length[0][0]']           
+                                                                                                  
+==================================================================================================
+Total params: 16,529,950
+Trainable params: 16,522,782
+Non-trainable params: 7,168
+__________________________________________________________________________________________________

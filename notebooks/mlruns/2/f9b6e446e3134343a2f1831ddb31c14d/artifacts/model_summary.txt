@@ -1,0 +1,32 @@
+Model: "model_2"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ the_input (InputLayer)         [(None, None)]       0           []                               
+                                                                                                  
+ preprocessing_model (Functiona  (None, None, 128, 1  512        ['the_input[0][0]']              
+ l)                             )                                                                 
+                                                                                                  
+ tf.compat.v1.squeeze_1 (TFOpLa  (None, None, 128)   0           ['preprocessing_model[1][0]']    
+ mbda)                                                                                            
+                                                                                                  
+ input_length (InputLayer)      [(None, 1)]          0           []                               
+                                                                                                  
+ model_1 (Functional)           (None, None, 222)    480272      ['tf.compat.v1.squeeze_1[0][0]'] 
+                                                                                                  
+ the_labels (InputLayer)        [(None, None)]       0           []                               
+                                                                                                  
+ lambda_1 (Lambda)              (None, 1)            0           ['input_length[0][0]']           
+                                                                                                  
+ label_length (InputLayer)      [(None, 1)]          0           []                               
+                                                                                                  
+ ctc (Lambda)                   (None, 1)            0           ['model_1[0][0]',                
+                                                                  'the_labels[0][0]',             
+                                                                  'lambda_1[0][0]',               
+                                                                  'label_length[0][0]']           
+                                                                                                  
+==================================================================================================
+Total params: 480,784
+Trainable params: 479,228
+Non-trainable params: 1,556
+__________________________________________________________________________________________________

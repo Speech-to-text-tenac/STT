@@ -1,0 +1,4 @@
+outs:
+- md5: 3d8ff7e036ba28cf17445ac4b90e1be0
+  size: 1731126
+  path: translation_obj.pkl

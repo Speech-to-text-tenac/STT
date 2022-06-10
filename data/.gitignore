@@ -4,3 +4,10 @@
 /valid_corpus.json
 /metadata.csv
 /train_corpus.csv
+/test.json
+/train.json
+/meta_data.csv
+/audio_dict.pkl
+/translation_obj.pkl
+/test_audio_dict.pkl
+/test_translation_dict.pkl

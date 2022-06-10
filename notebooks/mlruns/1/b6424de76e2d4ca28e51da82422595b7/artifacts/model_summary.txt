@@ -1,0 +1,32 @@
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ the_input (InputLayer)         [(None, None)]       0           []                               
+                                                                                                  
+ preprocessing_model (Functiona  (None, None, 100, 1  400        ['the_input[0][0]']              
+ l)                             )                                                                 
+                                                                                                  
+ tf.compat.v1.squeeze (TFOpLamb  (None, None, 100)   0           ['preprocessing_model[0][0]']    
+ da)                                                                                              
+                                                                                                  
+ input_length (InputLayer)      [(None, 1)]          0           []                               
+                                                                                                  
+ simple_rnn_model (Functional)  (None, None, 224)    270368      ['tf.compat.v1.squeeze[0][0]']   
+                                                                                                  
+ the_labels (InputLayer)        [(None, None)]       0           []                               
+                                                                                                  
+ lambda (Lambda)                (None, 1)            0           ['input_length[0][0]']           
+                                                                                                  
+ label_length (InputLayer)      [(None, 1)]          0           []                               
+                                                                                                  
+ ctc (Lambda)                   (None, 1)            0           ['simple_rnn_model[0][0]',       
+                                                                  'the_labels[0][0]',             
+                                                                  'lambda[0][0]',                 
+                                                                  'label_length[0][0]']           
+                                                                                                  
+==================================================================================================
+Total params: 270,768
+Trainable params: 270,120
+Non-trainable params: 648
+__________________________________________________________________________________________________
