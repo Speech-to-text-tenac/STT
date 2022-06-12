@@ -75,7 +75,7 @@ export const Prediction = () => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const url = "https://6493-196-190-62-211.ngrok.io/predict";
+    const url = "https://stt-amharic.azurewebsites.net/predict";
     const formData = new FormData();
     formData.append("file", file);
     formData.append("fileName", file.name);
