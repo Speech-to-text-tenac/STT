@@ -1,15 +1,32 @@
 import classesp from "./Prediction.module.css";
 import axios from "axios";
 import React, { useState } from "react";
-// let gumStream = null;
-// let recorder = null;
+// import { trackPromise } from 'react-promise-tracker';// let gumStream = null;
+import { usePromiseTracker } from "react-promise-tracker";
+import {ThreeDots} from 'react-loader-spinner';
 // let audioContext = null;
 // const audio;
+const LoadingIndicator = props => {
+  const { promiseInProgress } = usePromiseTracker();
 
+  return promiseInProgress && 
+    <div
+      style={{
+        width: "100%",
+        height: "100",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+      }}
+    >
+      <ThreeDots type="ThreeDots" color="#2BAD60" height="100" width="100" />
+    </div>
+};
 export const Prediction = () => {
   // const [show, setShow] = useState(false);
   // const [view, setView] = useState(true);
   const [userData, setUserData] = useState({});
+
   // const startRecording = () => {
   //   let constraints = {
   //     audio: true,
@@ -72,10 +89,11 @@ export const Prediction = () => {
   function handleChange(event) {
     setFile(event.target.files[0]);
   }
-
+  
   function handleSubmit(event) {
-    event.preventDefault();
-    const url = "https://6493-196-190-62-211.ngrok.io/predict";
+    // trackPromise(
+    event.preventDefault()
+    const url = "https://stt-amharic.azurewebsites.net/predict";
     const formData = new FormData();
     formData.append("file", file);
     formData.append("fileName", file.name);
@@ -87,42 +105,19 @@ export const Prediction = () => {
     };
     
     axios.post(url, formData, config).then((response) => {
-      console.log("here");
-      console.log(response);
       console.log(response.data.message);
       setUserData(response.data);
-      // let audio = response.data.message;
-      // this.setState({audioMessage:audio})
-      // console.log(audioMessage)
+     
 
     }).catch((err)=>{
       console.log(err,"error here")
     });
   }
+  
 
   return (
     <>
       <div className={classesp.container}>
-        {/* <div className={classesp.link}>
-          <span title="choose" onClick={() => setShow(!show)}></span>
-          <br></br>
-        <span></span>
-          {show ? (
-            <ul>
-              <li>
-                <Link to="" onClick={() => setView(true)}>
-                  Record Audio
-                </Link>
-              </li>
-              <hr></hr>
-              <li>
-                <Link to="" onClick={() => setView(false)}>
-                  Upload Audio
-                </Link>
-              </li>
-            </ul>
-          ) : null}
-        </div> */}
          <div className={classesp.upload}>
               <div>
                 <h2>Upload Audio</h2>
@@ -134,7 +129,8 @@ export const Prediction = () => {
                 </div>
               </div>
               <section>
-                <p>{userData.message}</p>
+              <LoadingIndicator/>
+              <p>{userData.message}</p>
               </section>
             </div>
 

@@ -122,6 +122,14 @@
   border-color: #000d1a;
 
 }
+:upload button:click{
+  transform: translateY(-2px);
+  transition: 0.5s;
+  filter: brightness(110%);
+  background-color: #97c2f2;
+  color: #000d1ab2;
+  border-color: #000d1a;
+}
 
 .upload section {
   background-color: #80bbff;
